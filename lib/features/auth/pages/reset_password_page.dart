@@ -9,7 +9,7 @@ import '../widgets/auth_form_field.dart';
 class ResetPasswordPage extends StatelessWidget {
   const ResetPasswordPage({Key? key}) : super(key: key);
 
-  static const String routeName = '/rest_password';
+  static const String routeName = '/reset-password';
 
   @override
   Widget build(BuildContext context) {

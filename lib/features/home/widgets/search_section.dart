@@ -5,8 +5,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../styles/app_colors.dart';
 
 class SearchSection extends StatelessWidget {
+  final TextEditingController searchController;
+  final ValueChanged<String>? onChanged;
+
   const SearchSection({
     super.key,
+    required this.searchController, this.onChanged,
   });
 
   @override
@@ -18,9 +22,11 @@ class SearchSection extends StatelessWidget {
       child: Align(
         alignment: Alignment.center,
         child: TextField(
+          controller: searchController,
+          onChanged: onChanged,
           decoration: InputDecoration(
             contentPadding:
-            EdgeInsets.symmetric(vertical: 12.h, horizontal: 10.w),
+                EdgeInsets.symmetric(vertical: 12.h, horizontal: 10.w),
             filled: true,
             fillColor: AppColors.fieldColor,
             hintText: 'Search Product Name',

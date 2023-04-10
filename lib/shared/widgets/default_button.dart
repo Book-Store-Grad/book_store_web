@@ -20,7 +20,7 @@ class DefaultButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialButton(
-      onPressed: () {},
+      onPressed: onPressed,
       color: AppColors.primary,
       minWidth: width,
       height: height,

@@ -1,6 +1,7 @@
+import 'package:book_store_web/features/book/pages/book_page.dart';
 import 'package:go_router/go_router.dart';
 
-import '../features/auth/pages/forget_password_page.dart';
+import '../features/auth/pages/forgot_password_page.dart';
 import '../features/auth/pages/login_page.dart';
 import '../features/auth/pages/reset_password_page.dart';
 import '../features/auth/pages/signup_page.dart';
@@ -22,8 +23,8 @@ final router = GoRouter(
       builder: (context, state) => const SignUpPage(),
     ),
     GoRoute(
-      path: ForgetPasswordPage.routeName,
-      builder: (context, state) => const ForgetPasswordPage(),
+      path: ForgotPasswordPage.routeName,
+      builder: (context, state) => const ForgotPasswordPage(),
     ),
     GoRoute(
       path: ResetPasswordPage.routeName,
@@ -33,10 +34,14 @@ final router = GoRouter(
       path: HomePage.routeName,
       builder: (context, state) => const HomePage(),
     ),
+    GoRoute(
+      path: BookPage.routeName,
+      builder: (context, state) => const BookPage(),
+    ),
   ],
   redirect: (context, state) {
     if (state.location == '/') {
-      return LoginPage.routeName;
+      return HomePage.routeName;
     }
   },
 );

@@ -1,3 +1,4 @@
+import 'package:book_store_web/features/home/pages/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
@@ -6,7 +7,7 @@ import '../widgets/auth_app_bar.dart';
 import '../../../shared/widgets/default_button.dart';
 import '../../../shared/widgets/footer.dart';
 import '../widgets/auth_form_field.dart';
-import 'forget_password_page.dart';
+import 'forgot_password_page.dart';
 import 'signup_page.dart';
 
 class LoginPage extends StatelessWidget {
@@ -46,7 +47,7 @@ class LoginPage extends StatelessWidget {
                 alignment: AlignmentDirectional.centerEnd,
                 child: TextButton(
                   onPressed: () {
-                    context.go(ForgetPasswordPage.routeName);
+                    context.go(ForgotPasswordPage.routeName);
                   },
                   child: Text(
                     'Forgot Password?',
@@ -61,7 +62,9 @@ class LoginPage extends StatelessWidget {
             ),
             SizedBox(height: 18.h),
             DefaultButton(
-              onPressed: () {},
+              onPressed: () {
+                context.go(HomePage.routeName);
+              },
               height: 56.h,
               width: 300.w,
               text: 'Login',

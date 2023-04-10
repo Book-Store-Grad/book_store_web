@@ -5,7 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:url_strategy/url_strategy.dart';
-import 'styles/app_colors.dart';
+
+import 'styles/app_themes.dart';
 
 void main() {
   setPathUrlStrategy();
@@ -21,46 +22,16 @@ class BookStore extends StatelessWidget {
       designSize: const Size(1366, 768),
       minTextAdapt: true,
       useInheritedMediaQuery: true,
-      builder: (context, child) =>
-          BlocProvider(
-            create: (context) => GlobalCubit(),
-            child: MaterialApp.router(
-              debugShowCheckedModeBanner: false,
-              title: 'Book Store',
-              theme: ThemeData(
-                primarySwatch: AppColors.primarySwatch,
-                scaffoldBackgroundColor: Colors.white,
-                fontFamily: 'DmSans',
-                textButtonTheme: TextButtonThemeData(
-                  style: ButtonStyle(
-                    overlayColor: MaterialStateProperty.resolveWith<Color>(
-                          (Set<MaterialState> states) {
-                        return Colors.transparent;
-                      },
-                    ),
-                    foregroundColor: MaterialStateProperty.resolveWith<Color>(
-                          (Set<MaterialState> states) {
-                        if (states.contains(MaterialState.hovered)) {
-                          return AppColors.primary;
-                        }
-                        return Colors.black;
-                      },
-                    ),
-                    textStyle: MaterialStateProperty.resolveWith<TextStyle>(
-                          (Set<MaterialState> states) {
-                        return TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 21.sp,
-                        );
-                      },
-                    ),
-                  ),
-                ),
-              ),
-              scrollBehavior: MyCustomScrollBehavior(),
-              routerConfig: router,
-            ),
-          ),
+      builder: (context, child) => BlocProvider(
+        create: (context) => GlobalCubit(),
+        child: MaterialApp.router(
+          debugShowCheckedModeBanner: false,
+          title: 'Book Store',
+          theme: AppThemes.lightTheme,
+          scrollBehavior: MyCustomScrollBehavior(),
+          routerConfig: router,
+        ),
+      ),
     );
   }
 }

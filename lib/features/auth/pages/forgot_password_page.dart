@@ -6,10 +6,10 @@ import '../../../shared/widgets/default_button.dart';
 import '../../../shared/widgets/footer.dart';
 import '../widgets/auth_form_field.dart';
 
-class ForgetPasswordPage extends StatelessWidget {
-  const ForgetPasswordPage({Key? key}) : super(key: key);
+class ForgotPasswordPage extends StatelessWidget {
+  const ForgotPasswordPage({Key? key}) : super(key: key);
 
-  static const String routeName = '/forget_password';
+  static const String routeName = '/forgot-password';
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +20,7 @@ class ForgetPasswordPage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              'Forget Password',
+              'Forgot Password',
               style: TextStyle(
                 fontSize: 38.sp,
                 fontWeight: FontWeight.bold,

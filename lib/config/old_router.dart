@@ -1,4 +1,4 @@
-import 'package:book_store_web/features/auth/pages/forget_password_page.dart';
+import 'package:book_store_web/features/auth/pages/forgot_password_page.dart';
 import 'package:book_store_web/features/auth/pages/login_page.dart';
 import 'package:book_store_web/features/auth/pages/reset_password_page.dart';
 import 'package:book_store_web/features/auth/pages/signup_page.dart';
@@ -16,9 +16,9 @@ Route<dynamic> generateRoute(RouteSettings routeSettings) {
         builder: (context) => const SignUpPage(),
       );
 
-    case ForgetPasswordPage.routeName:
+    case ForgotPasswordPage.routeName:
       return MaterialPageRoute(
-        builder: (context) => const ForgetPasswordPage(),
+        builder: (context) => const ForgotPasswordPage(),
       );
 
     case ResetPasswordPage.routeName:

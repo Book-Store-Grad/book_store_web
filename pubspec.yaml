@@ -20,6 +20,7 @@ dependencies:
   url_strategy: ^0.2.0
   bloc: ^8.1.1
   flutter_bloc: ^8.1.2
+  animated_conditional_builder: ^0.0.5
 
 dev_dependencies:
   flutter_test:

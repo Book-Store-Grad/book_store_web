@@ -59,6 +59,17 @@ class GlobalCubit extends Cubit<GlobalState> {
         break;
     }
   }
+
+  final TextEditingController searchController = TextEditingController();
+
+  void onSearchTextChanged() {
+    emit(SearchState());
+  }
+
+  void clearSearch() {
+    searchController.clear();
+    emit(ClearSearchState());
+  }
 }
 
 enum HomeSections { home, linguistics, selfDevelopment, technologies }
