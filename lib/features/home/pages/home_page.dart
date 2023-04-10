@@ -31,7 +31,7 @@ class HomePage extends StatelessWidget {
               children: [
                 SearchSection(searchController: searchController, onChanged: (_) => globalCubit.onSearchTextChanged(),),
                 AnimatedConditionalBuilder(
-                  condition: false,
+                  condition: searchController.text == '',
                   builder:(context) =>  Column(
                     children: [
                       HomeSection(
@@ -56,13 +56,13 @@ class HomePage extends StatelessWidget {
                     ],
                   ),
                   fallback: (context) => Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 125.h, vertical: 35.h),
+                    padding: EdgeInsets.symmetric(horizontal: 150.h, vertical: 25.h),
                     child: GridView.builder(
                       gridDelegate:  SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 4,
-                        childAspectRatio: 0.75.w/1.13.h,
-                        crossAxisSpacing: 20.w,
                         mainAxisSpacing: 20.h,
+                        childAspectRatio: 0.74.w/1.13.h,
+                        crossAxisCount: 4,
+                        crossAxisSpacing: 10.w,
                       ),
                       itemBuilder: (context, index) => const SearchItem(),
                       itemCount: 25,

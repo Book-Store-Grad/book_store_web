@@ -49,6 +49,7 @@ class BookItem extends StatelessWidget {
                             fontWeight: FontWeight.w500,
                             fontSize: 11.sp,
                           ),
+                          overflow: TextOverflow.ellipsis,
                         ),
                       ),
                       Align(

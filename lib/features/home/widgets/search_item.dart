@@ -34,7 +34,7 @@ class SearchItem extends StatelessWidget {
                   children: [
                     Image.asset(
                       AssetImages.cover,
-                      height: 275.h,
+                      height: 305.h,
                       width: double.infinity,
                       fit: BoxFit.fill,
                     ),
@@ -44,12 +44,13 @@ class SearchItem extends StatelessWidget {
                       child: Text(
                         'My Book Cover',
                         style: TextStyle(
-                          fontWeight: FontWeight.w500,
-                          fontSize: 14.5.sp,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 15.sp,
                         ),
+                        overflow: TextOverflow.ellipsis,
                       ),
                     ),
-                    SizedBox(height: 5.h),
+                    SizedBox(height: 8.h),
                     Align(
                       alignment: Alignment.centerLeft,
                       child: Text(
