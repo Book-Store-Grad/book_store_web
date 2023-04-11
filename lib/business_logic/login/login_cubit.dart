@@ -2,8 +2,8 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../entities/user.dart';
 import '../../features/auth/repositories/login_repository.dart';
+import '../../models/user.dart';
 import '../../schemas/login_schema.dart';
 
 part 'login_state.dart';

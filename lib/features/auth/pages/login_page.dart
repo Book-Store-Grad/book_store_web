@@ -1,10 +1,10 @@
-import 'package:book_store_web/business_logic/loginCubit/login_cubit.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../business_logic/login/login_cubit.dart';
 import '../../home/pages/home_page.dart';
 import '../widgets/auth_app_bar.dart';
 import '../../../shared/widgets/default_button.dart';

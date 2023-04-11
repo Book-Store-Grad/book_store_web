@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../business_logic/global_cubit/global_cubit.dart';
+import '../../../business_logic/home/home_cubit.dart';
 import '../../../shared/widgets/footer.dart';
 import '../widgets/app_bar.dart';
 import '../widgets/home_section.dart';
@@ -17,41 +17,40 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    GlobalCubit globalCubit =
-    BlocProvider.of<GlobalCubit>(context, listen: false);
+    HomeCubit cubit =
+    BlocProvider.of<HomeCubit>(context, listen: false);
     return Scaffold(
       appBar: appBar(context),
       body: SingleChildScrollView(
-        controller: globalCubit.scrollController,
-        child: BlocConsumer<GlobalCubit, GlobalState>(
+        controller: cubit.scrollController,
+        child: BlocConsumer<HomeCubit, HomeState>(
           listener: (context, state) {},
           builder: (context, state) {
-            TextEditingController searchController = BlocProvider.of<GlobalCubit>(context).searchController;
             return Column(
               children: [
-                SearchSection(searchController: searchController, onChanged: (_) => globalCubit.onSearchTextChanged(),),
+                SearchSection(searchController: cubit.searchController, onChanged: (_) => cubit.onSearchTextChanged(),),
                 AnimatedConditionalBuilder(
-                  condition: searchController.text == '',
+                  condition: cubit.searchController.text == '',
                   builder:(context) =>  Column(
                     children: [
                       HomeSection(
                         label: 'Recommended For You',
-                        scrollKey: globalCubit.homeKey,
+                        scrollKey: cubit.homeKey,
                       ),
                       SizedBox(height: 25.h),
                       HomeSection(
                         label: 'Linguistics',
-                        scrollKey: globalCubit.linguisticsKey,
+                        scrollKey: cubit.linguisticsKey,
                       ),
                       SizedBox(height: 25.h),
                       HomeSection(
                         label: 'Self-Development',
-                        scrollKey: globalCubit.selfDevelopmentKey,
+                        scrollKey: cubit.selfDevelopmentKey,
                       ),
                       SizedBox(height: 25.h),
                       HomeSection(
                         label: 'Technologies',
-                        scrollKey: globalCubit.technologiesKey,
+                        scrollKey: cubit.technologiesKey,
                       ),
                     ],
                   ),
@@ -77,6 +76,7 @@ class HomePage extends StatelessWidget {
                   switchOutCurve: Curves.easeInOut,
                 ),
                 SizedBox(height: 25.h),
+                MaterialButton(onPressed: () => cubit.getAlLBooks(), color: Colors.red, height: 100.h, minWidth: 500.w,),
               ],
             );
           },

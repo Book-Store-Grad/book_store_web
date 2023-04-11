@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../business_logic/sign_up_cubit/sign_up_cubit.dart';
+import '../../../business_logic/sign_up/sign_up_cubit.dart';
 import '../../../shared/widgets/default_button.dart';
 import '../../../shared/widgets/footer.dart';
 import '../../../styles/app_colors.dart';

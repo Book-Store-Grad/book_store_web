@@ -4,4 +4,5 @@ class ApiConstants {
   static const String signup = "$baseUrl/auth/signup";
   static const String forgetPassword = "$baseUrl/auth/forget-password";
   static const String resetPassword = "$baseUrl/auth/reset-password";
+  static const String getAllBooks = "$baseUrl/book/all";
 }

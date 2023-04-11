@@ -1,9 +1,10 @@
-import 'package:book_store_web/business_logic/global_cubit/global_cubit.dart';
 import 'package:book_store_web/features/home/pages/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
+
+import '../../business_logic/home/home_cubit.dart';
 
 class NavBar extends StatefulWidget {
   const NavBar({super.key});
@@ -15,11 +16,11 @@ class NavBar extends StatefulWidget {
 class _NavBarState extends State<NavBar> {
   @override
   Widget build(BuildContext context) {
-    GlobalCubit globalCubit = BlocProvider.of<GlobalCubit>(
+    HomeCubit globalCubit = BlocProvider.of<HomeCubit>(
       context,
     );
 
-    return BlocConsumer<GlobalCubit, GlobalState>(
+    return BlocConsumer<HomeCubit, HomeState>(
       listener: (context, state) {},
       builder: (context, state) {
         bool isHome = ModalRoute.of(context)!.settings.name == '/home';
