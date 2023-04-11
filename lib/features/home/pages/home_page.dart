@@ -20,7 +20,7 @@ class HomePage extends StatelessWidget {
     GlobalCubit globalCubit =
     BlocProvider.of<GlobalCubit>(context, listen: false);
     return Scaffold(
-      appBar: appBar(),
+      appBar: appBar(context),
       body: SingleChildScrollView(
         controller: globalCubit.scrollController,
         child: BlocConsumer<GlobalCubit, GlobalState>(

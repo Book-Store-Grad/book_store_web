@@ -14,7 +14,7 @@ class VerificationPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: authAppBar(),
+      appBar: authAppBar(context),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

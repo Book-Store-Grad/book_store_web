@@ -1,11 +1,13 @@
-import 'package:book_store_web/business_logic/global_cubit/global_cubit.dart';
-import 'package:book_store_web/config/go_router.dart';
-import 'package:book_store_web/config/scroll_behaviour.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:url_strategy/url_strategy.dart';
 
+import 'business_logic/global_cubit/global_cubit.dart';
+import 'business_logic/loginCubit/login_cubit.dart';
+import 'business_logic/sign_up_cubit/sign_up_cubit.dart';
+import 'config/go_router.dart';
+import 'config/scroll_behaviour.dart';
 import 'styles/app_themes.dart';
 
 void main() {
@@ -22,16 +24,28 @@ class BookStore extends StatelessWidget {
       designSize: const Size(1366, 768),
       minTextAdapt: true,
       useInheritedMediaQuery: true,
-      builder: (context, child) => BlocProvider(
-        create: (context) => GlobalCubit(),
-        child: MaterialApp.router(
-          debugShowCheckedModeBanner: false,
-          title: 'Book Store',
-          theme: AppThemes.lightTheme,
-          scrollBehavior: MyCustomScrollBehavior(),
-          routerConfig: router,
-        ),
-      ),
+      builder: (context, child) =>
+          MultiBlocProvider(
+            providers: [
+              BlocProvider(
+                create: (context) => GlobalCubit(),
+              ),
+              BlocProvider(
+                create: (context) => LoginCubit(),
+              ),
+              BlocProvider(
+                create: (context) => SignUpCubit(),
+              ),
+
+            ],
+            child: MaterialApp.router(
+              debugShowCheckedModeBanner: false,
+              title: 'Book Store',
+              theme: AppThemes.lightTheme,
+              scrollBehavior: MyCustomScrollBehavior(),
+              routerConfig: router,
+            ),
+          ),
     );
   }
 }

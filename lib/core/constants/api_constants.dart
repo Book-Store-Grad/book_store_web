@@ -1,4 +1,4 @@
-class ApiUrl {
+class ApiConstants {
   static const String baseUrl = "https://bookstore-api-9pzk.onrender.com";
   static const String login = "$baseUrl/auth";
   static const String signup = "$baseUrl/auth/signup";

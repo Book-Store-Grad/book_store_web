@@ -6,11 +6,25 @@ import '../../../styles/app_colors.dart';
 class AuthFormField extends StatelessWidget {
   final String label;
   final String hint;
+  final TextEditingController? controller;
+  final FormFieldSetter? onSaved;
+  final ValueChanged<String>? onChanged;
+  final FormFieldValidator? validator;
+  final bool? isHidden;
+  final IconData? suffixIcon;
+  final VoidCallback? onSuffixPressed;
 
   const AuthFormField({
     super.key,
     required this.label,
     required this.hint,
+    this.controller,
+    this.onSaved,
+    this.onChanged,
+    this.validator,
+    this.isHidden = false,
+    this.onSuffixPressed,
+    this.suffixIcon,
   });
 
   @override
@@ -20,10 +34,11 @@ class AuthFormField extends StatelessWidget {
       children: [
         Text(
           label,
-          style: TextStyle(fontSize: 12.sp, fontWeight: FontWeight.w500),
+          style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w500),
         ),
         SizedBox(height: 10.h),
         TextFormField(
+          controller: controller,
           decoration: InputDecoration(
             contentPadding:
                 EdgeInsets.symmetric(vertical: 20.h, horizontal: 10.w),
@@ -31,7 +46,7 @@ class AuthFormField extends StatelessWidget {
             fillColor: AppColors.fieldColor,
             hintText: hint,
             hintStyle: TextStyle(
-              fontSize: 11.5.sp,
+              fontSize: 13.sp,
               fontWeight: FontWeight.w500,
               color: AppColors.hintTextColor,
             ),
@@ -41,11 +56,22 @@ class AuthFormField extends StatelessWidget {
             ),
             constraints: BoxConstraints(
               maxWidth: 350.w,
-              maxHeight: 50.h,
             ),
             isDense: true,
+            suffixIcon: InkWell(
+              onTap: onSuffixPressed,
+              child: Icon(
+                suffixIcon,
+                size: 20.r,
+              ),
+            ),
+            errorStyle: TextStyle(fontSize: 11.5.sp),
           ),
           textAlignVertical: TextAlignVertical.center,
+          onSaved: onSaved,
+          onChanged: onChanged,
+          validator: validator,
+          obscureText: isHidden!,
         ),
       ],
     );

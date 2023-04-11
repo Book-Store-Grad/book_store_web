@@ -21,6 +21,7 @@ dependencies:
   bloc: ^8.1.1
   flutter_bloc: ^8.1.2
   animated_conditional_builder: ^0.0.5
+  flutter_svg: ^2.0.4
 
 dev_dependencies:
   flutter_test:

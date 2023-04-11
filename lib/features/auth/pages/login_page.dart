@@ -1,11 +1,15 @@
-import 'package:book_store_web/features/home/pages/home_page.dart';
+import 'package:book_store_web/business_logic/loginCubit/login_cubit.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../home/pages/home_page.dart';
 import '../widgets/auth_app_bar.dart';
 import '../../../shared/widgets/default_button.dart';
 import '../../../shared/widgets/footer.dart';
+import '../widgets/auth_error_dialog.dart';
 import '../widgets/auth_form_field.dart';
 import 'forgot_password_page.dart';
 import 'signup_page.dart';
@@ -17,87 +21,138 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    LoginCubit cubit = BlocProvider.of<LoginCubit>(context, listen: false);
     return Scaffold(
-      appBar: authAppBar(),
+      appBar: authAppBar(context),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              'Login',
-              style: TextStyle(
-                fontSize: 38.sp,
-                fontWeight: FontWeight.bold,
+        child: Form(
+          key: cubit.loginFormKey,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                'Login',
+                style: TextStyle(
+                  fontSize: 38.sp,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
-            ),
-            SizedBox(height: 30.h),
-            const AuthFormField(
-              label: 'Email',
-              hint: 'Enter your E-mail',
-            ),
-            SizedBox(height: 25.h),
-            const AuthFormField(
-              label: 'Password',
-              hint: 'Enter your password',
-            ),
-            SizedBox(height: 18.h),
-            SizedBox(
-              width: 350.w,
-              child: Align(
-                alignment: AlignmentDirectional.centerEnd,
-                child: TextButton(
-                  onPressed: () {
-                    context.go(ForgotPasswordPage.routeName);
-                  },
-                  child: Text(
-                    'Forgot Password?',
-                    style: TextStyle(
-                      fontSize: 13.sp,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black,
+              SizedBox(height: 30.h),
+              AuthFormField(
+                label: 'Email',
+                hint: 'Enter your E-mail',
+                onChanged: (email) => cubit.loginSchema.email = email,
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return "Please Enter Your Email";
+                  }
+                  if (!RegExp(r'\S+@\S+\.\S+').hasMatch(value)) {
+                    return "Please Enter a Valid Email";
+                  }
+                  return null;
+                },
+              ),
+              SizedBox(height: 25.h),
+              BlocConsumer<LoginCubit, LoginState>(
+                listener: (context, state) {},
+                builder: (context, state) {
+                  return AuthFormField(
+                    label: 'Password',
+                    hint: 'Enter your password',
+                    onChanged: (password) =>
+                        cubit.loginSchema.password = password,
+                    isHidden: cubit.passwordHidden,
+                    suffixIcon: cubit.passwordHidden ? CupertinoIcons.eye_slash : CupertinoIcons.eye,
+                    onSuffixPressed: () {
+                      cubit.switchPassword();
+                    },
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return "Please Enter Your Password";
+                      }
+                      return null;
+                    },
+                  );
+                },
+              ),
+              SizedBox(height: 18.h),
+              SizedBox(
+                width: 350.w,
+                child: Align(
+                  alignment: AlignmentDirectional.centerEnd,
+                  child: TextButton(
+                    onPressed: () {
+                      context.go(ForgotPasswordPage.routeName);
+                    },
+                    child: Text(
+                      'Forgot Password?',
+                      style: TextStyle(
+                        fontSize: 13.sp,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                      ),
                     ),
                   ),
                 ),
               ),
-            ),
-            SizedBox(height: 18.h),
-            DefaultButton(
-              onPressed: () {
-                context.go(HomePage.routeName);
-              },
-              height: 56.h,
-              width: 300.w,
-              text: 'Login',
-            ),
-            SizedBox(height: 14.h),
-            SizedBox(
-              width: 350.w,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    "Don't have an account?",
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 13.sp,
-                    ),
-                  ),
-                  TextButton(
-                    onPressed: () {
-                      context.go(SignUpPage.routeName);
-                    },
-                    child: Text(
-                      'Register',
+              SizedBox(height: 18.h),
+              BlocConsumer<LoginCubit, LoginState>(
+                listener: (context, state) {
+                  if (state is LoginSuccessState) {
+                    return context.go(HomePage.routeName);
+                  }
+                  if (state is LoginFailureState) {
+                    showDialog(
+                      context: context,
+                      builder: (context) => AuthErrorDialog(error: state.error),
+                    );
+                  }
+                },
+                builder: (context, state) {
+                  return state is LoginLoadingState
+                      ? const CircularProgressIndicator()
+                      : DefaultButton(
+                          onPressed: () {
+                            if (cubit.loginFormKey.currentState!.validate()) {
+                              cubit.loginUser();
+                            }
+                          },
+                          height: 56.h,
+                          width: 300.w,
+                          text: 'Login',
+                        );
+                },
+              ),
+              SizedBox(height: 14.h),
+              SizedBox(
+                width: 350.w,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      "Don't have an account?",
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 13.sp,
                       ),
                     ),
-                  ),
-                ],
+                    TextButton(
+                      onPressed: () {
+                        context.go(SignUpPage.routeName);
+                      },
+                      child: Text(
+                        'Register',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 13.sp,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
       bottomNavigationBar: const Footer(),
