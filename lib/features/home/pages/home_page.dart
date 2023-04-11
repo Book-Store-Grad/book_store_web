@@ -76,7 +76,6 @@ class HomePage extends StatelessWidget {
                   switchOutCurve: Curves.easeInOut,
                 ),
                 SizedBox(height: 25.h),
-                MaterialButton(onPressed: () => cubit.getAlLBooks(), color: Colors.red, height: 100.h, minWidth: 500.w,),
               ],
             );
           },

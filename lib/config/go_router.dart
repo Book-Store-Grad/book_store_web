@@ -1,4 +1,5 @@
 import 'package:go_router/go_router.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../features/auth/pages/forgot_password_page.dart';
 import '../features/auth/pages/login_page.dart';
@@ -63,11 +64,17 @@ final router = GoRouter(
       path: OrderStatePage.routeName,
       builder: (context, state) => const OrderStatePage(),
     ),
-
   ],
-  redirect: (context, state) {
+  redirect: (context, state) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    bool isLogged = prefs.getString('token') != null;
     if (state.location == '/') {
-      return LoginPage.routeName;
+      if (isLogged) {
+        return HomePage.routeName;
+      } else {
+        return LoginPage.routeName;
+      }
     }
+    return null;
   },
 );

@@ -10,7 +10,7 @@ import 'config/go_router.dart';
 import 'config/scroll_behaviour.dart';
 import 'styles/app_themes.dart';
 
-void main() {
+void main() async{
   setPathUrlStrategy();
   runApp(const BookStore());
 }

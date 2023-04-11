@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../features/auth/repositories/login_repository.dart';
 import '../../models/user.dart';
@@ -33,6 +34,9 @@ class LoginCubit extends Cubit<LoginState> {
     );
     if (response.statusCode == 200) {
       user = User.fromJson(response.data);
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      await prefs.setString('token', user.accessToken!);
+      await prefs.setString('role', user.role!);
       emit(LoginSuccessState());
     } else if (response.statusCode == 400) {
       emit(LoginFailureState(response.data["detail"]));
