@@ -17,8 +17,7 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    HomeCubit cubit =
-    BlocProvider.of<HomeCubit>(context, listen: false);
+    HomeCubit cubit = BlocProvider.of<HomeCubit>(context, listen: false);
     return Scaffold(
       appBar: appBar(context),
       body: SingleChildScrollView(
@@ -28,38 +27,46 @@ class HomePage extends StatelessWidget {
           builder: (context, state) {
             return Column(
               children: [
-                SearchSection(searchController: cubit.searchController, onChanged: (_) => cubit.onSearchTextChanged(),),
+                SearchSection(
+                  searchController: cubit.searchController,
+                  onChanged: (_) => cubit.onSearchTextChanged(),
+                ),
                 AnimatedConditionalBuilder(
                   condition: cubit.searchController.text == '',
-                  builder:(context) =>  Column(
+                  builder: (context) => Column(
                     children: [
                       HomeSection(
                         label: 'Recommended For You',
                         scrollKey: cubit.homeKey,
+                        books: cubit.books,
                       ),
                       SizedBox(height: 25.h),
                       HomeSection(
                         label: 'Linguistics',
                         scrollKey: cubit.linguisticsKey,
+                        books: cubit.books,
                       ),
                       SizedBox(height: 25.h),
                       HomeSection(
                         label: 'Self-Development',
                         scrollKey: cubit.selfDevelopmentKey,
+                        books: cubit.books,
                       ),
                       SizedBox(height: 25.h),
                       HomeSection(
                         label: 'Technologies',
                         scrollKey: cubit.technologiesKey,
+                        books: cubit.books,
                       ),
                     ],
                   ),
                   fallback: (context) => Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 150.h, vertical: 25.h),
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 150.h, vertical: 25.h),
                     child: GridView.builder(
-                      gridDelegate:  SliverGridDelegateWithFixedCrossAxisCount(
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                         mainAxisSpacing: 20.h,
-                        childAspectRatio: 0.74.w/1.13.h,
+                        childAspectRatio: 0.74.w / 1.13.h,
                         crossAxisCount: 4,
                         crossAxisSpacing: 10.w,
                       ),

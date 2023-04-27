@@ -27,7 +27,7 @@ class BookStore extends StatelessWidget {
       builder: (context, child) => MultiBlocProvider(
         providers: [
           BlocProvider(
-            create: (context) => HomeCubit(),
+            create: (context) => HomeCubit()..getAlLBooks(),
           ),
           BlocProvider(
             create: (context) => LoginCubit(),

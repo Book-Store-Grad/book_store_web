@@ -13,4 +13,6 @@ class ClearSearchState extends HomeState {}
 
 class GetAllBooksLoadingState extends HomeState {}
 
+class GetAllBooksSuccessState extends HomeState {}
+
 

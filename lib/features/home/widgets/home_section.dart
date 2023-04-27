@@ -1,17 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:skeletons/skeletons.dart';
 
+import '../../../models/book.dart';
 import 'book_item.dart';
 import 'scroll_button.dart';
 
 class HomeSection extends StatefulWidget {
   final String label;
   final GlobalKey scrollKey;
+  final List<Book> books;
 
   const HomeSection({
     super.key,
     required this.label,
     required this.scrollKey,
+    required this.books,
   });
 
   @override
@@ -86,9 +90,20 @@ class _HomeSectionState extends State<HomeSection> {
                 width: 1200.w,
                 child: ListView.separated(
                   scrollDirection: Axis.horizontal,
-                  itemBuilder: (context, index) => const BookItem(),
+                  itemBuilder: (context, index) => widget.books.isEmpty
+                      ? SkeletonAvatar(
+                          style: SkeletonAvatarStyle(
+                            width: 150.w,
+                            height: 210.h,
+                            borderRadius: BorderRadius.circular(6).r,
+
+                          ),
+                        )
+                      : BookItem(
+                          book: widget.books[index],
+                        ),
                   separatorBuilder: (context, index) => SizedBox(width: 5.w),
-                  itemCount: 20,
+                  itemCount: widget.books.isEmpty ? 8 : widget.books.length,
                   controller: _scrollController,
                 ),
               ),

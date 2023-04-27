@@ -1,15 +1,19 @@
+import 'package:book_store_web/business_logic/home/home_cubit.dart';
 import 'package:book_store_web/core/utils/asset_imgaes.dart';
 import 'package:book_store_web/features/home/widgets/home_section.dart';
+import 'package:book_store_web/models/book.dart';
 import 'package:book_store_web/shared/widgets/footer.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../home/widgets/app_bar.dart';
 
 class BookPage extends StatelessWidget {
-  const BookPage({Key? key}) : super(key: key);
+  final Book book;
+  const BookPage({Key? key, required this.book}) : super(key: key);
 
   static const String routeName = '/book-name';
 
@@ -207,7 +211,11 @@ class BookPage extends StatelessWidget {
                 ],
               ),
             ),
-            HomeSection(label: 'Recommended For You', scrollKey: GlobalKey()),
+            HomeSection(
+              label: 'Recommended For You',
+              scrollKey: GlobalKey(),
+              books: BlocProvider.of<HomeCubit>(context).books,
+            ),
             SizedBox(height: 25.h),
           ],
         ),

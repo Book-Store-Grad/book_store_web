@@ -70,17 +70,21 @@ class HomeCubit extends Cubit<HomeState> {
   }
 
   // ----------------------------------------------------------------------------
+
   // Repository
   HomeRepository homeRepository = HomeRepository();
-
   List<Book> books = [];
 
   // Get All Books
   Future<void> getAlLBooks() async {
+    emit(GetAllBooksLoadingState());
     Response response = await homeRepository.getAllBooks();
     for (var jsonBook in response.data["content"]["books"]) {
-      books.add(Book.fromJson(jsonBook));
+      books.add(
+        Book.fromJson(jsonBook),
+      );
     }
+    emit(GetAllBooksSuccessState());
   }
 }
 

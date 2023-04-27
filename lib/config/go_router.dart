@@ -1,3 +1,5 @@
+import 'package:book_store_web/models/book.dart';
+import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -42,7 +44,10 @@ final router = GoRouter(
     ),
     GoRoute(
       path: BookPage.routeName,
-      builder: (context, state) => const BookPage(),
+      builder: (context, state) {
+        Book book = state.extra as Book;
+        return BookPage(book: book);
+      },
     ),
     GoRoute(
       path: FavoritesPage.routeName,
