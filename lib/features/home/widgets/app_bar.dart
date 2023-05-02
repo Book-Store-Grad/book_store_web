@@ -5,8 +5,8 @@ import 'package:go_router/go_router.dart';
 import '../../../core/utils/asset_imgaes.dart';
 import '../../../shared/widgets/nav_bar.dart';
 
-PreferredSizeWidget appBar(BuildContext context) => AppBar(
-      toolbarHeight: 90.h,
+PreferredSizeWidget appBar(BuildContext context, {bool? isAuthor}) => AppBar(
+      toolbarHeight: 70.h,
       backgroundColor: Colors.white,
       foregroundColor: Colors.black,
       elevation: 7,
@@ -15,7 +15,7 @@ PreferredSizeWidget appBar(BuildContext context) => AppBar(
         child: Row(
           children: [
             InkWell(
-              onTap:  () => context.go('/'),
+              onTap: () => context.go('/'),
               child: Row(
                 children: [
                   Image.asset(
@@ -36,7 +36,7 @@ PreferredSizeWidget appBar(BuildContext context) => AppBar(
               ),
             ),
             const Spacer(),
-            const NavBar(),
+            if ( isAuthor == null || !isAuthor) const NavBar(),
             const Spacer(),
             Row(
               children: [

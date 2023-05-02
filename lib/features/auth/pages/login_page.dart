@@ -1,3 +1,4 @@
+import 'package:book_store_web/features/author/pages/author_books_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -99,6 +100,9 @@ class LoginPage extends StatelessWidget {
               BlocConsumer<LoginCubit, LoginState>(
                 listener: (context, state) {
                   if (state is LoginSuccessState) {
+                    if(state.role.toLowerCase() == 'author') {
+                      return context.go(AuthorBooksPage.routeName);
+                    }
                     return context.go(HomePage.routeName);
                   }
                   if (state is LoginFailureState) {

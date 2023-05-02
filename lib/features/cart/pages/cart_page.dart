@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../shared/widgets/footer.dart';
+import '../../../styles/app_colors.dart';
 import '../../home/widgets/app_bar.dart';
 import '../widgets/cart_item.dart';
 import 'checkout_page.dart';
@@ -37,7 +38,7 @@ class CartPage extends StatelessWidget {
                     onPressed: () {
                       context.go(CheckoutPage.routeName);
                     },
-                    color: const Color(0xff00A3FF),
+                    color: AppColors.blueButtonColor,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10.r),
                     ),

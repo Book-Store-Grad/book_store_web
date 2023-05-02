@@ -5,6 +5,7 @@ class AppColors {
   static const fieldColor = Color(0xffFAFAFA);
   static const hintTextColor = Color(0xffC4C5C4);
   static const footerColor = Color(0xff3E3E3E);
+  static const blueButtonColor = Color(0xff00A3FF);
 
   static const MaterialColor primarySwatch = MaterialColor(
     0xffa30105,

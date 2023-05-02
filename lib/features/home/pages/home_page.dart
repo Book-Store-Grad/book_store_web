@@ -82,13 +82,13 @@ class HomePage extends StatelessWidget {
                   switchInCurve: Curves.easeInOut,
                   switchOutCurve: Curves.easeInOut,
                 ),
-                SizedBox(height: 25.h),
+                SizedBox(height: 20.h),
+                const Footer(),
               ],
             );
           },
         ),
       ),
-      bottomNavigationBar: const Footer(),
     );
   }
 }

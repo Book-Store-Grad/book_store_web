@@ -10,7 +10,11 @@ class SwitchPasswordShowState extends LoginState {}
 
 class LoginLoadingState extends LoginState {}
 
-class LoginSuccessState extends LoginState {}
+class LoginSuccessState extends LoginState {
+  final String role;
+
+  LoginSuccessState(this.role);
+}
 
 class LoginFailureState extends LoginState {
   final String error;
