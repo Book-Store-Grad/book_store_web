@@ -23,6 +23,7 @@ dependencies:
   animated_conditional_builder: ^0.0.5
   flutter_svg: ^2.0.4
   skeletons: ^0.0.3
+  dropdown_button2: ^2.1.0
 
 dev_dependencies:
   flutter_test:

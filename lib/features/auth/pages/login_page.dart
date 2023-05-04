@@ -11,7 +11,7 @@ import '../widgets/auth_app_bar.dart';
 import '../../../shared/widgets/default_button.dart';
 import '../../../shared/widgets/footer.dart';
 import '../widgets/auth_error_dialog.dart';
-import '../widgets/auth_form_field.dart';
+import '../../../shared/widgets/default_text_form_field.dart';
 import 'forgot_password_page.dart';
 import 'signup_page.dart';
 
@@ -39,7 +39,7 @@ class LoginPage extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 30.h),
-              AuthFormField(
+              DefaultTextFormField(
                 label: 'Email',
                 hint: 'Enter your E-mail',
                 onChanged: (email) => cubit.loginSchema.email = email,
@@ -57,7 +57,7 @@ class LoginPage extends StatelessWidget {
               BlocConsumer<LoginCubit, LoginState>(
                 listener: (context, state) {},
                 builder: (context, state) {
-                  return AuthFormField(
+                  return DefaultTextFormField(
                     label: 'Password',
                     hint: 'Enter your password',
                     onChanged: (password) =>

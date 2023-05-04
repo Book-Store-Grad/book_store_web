@@ -5,6 +5,8 @@ class Book {
   String? genre;
   String? price;
 
+  Book();
+
   Book.fromJson(Map<String, dynamic> json) {
     id = json["b_id"];
     name = json["b_name"];

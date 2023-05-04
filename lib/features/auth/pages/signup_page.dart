@@ -10,7 +10,7 @@ import '../../../shared/widgets/footer.dart';
 import '../../../styles/app_colors.dart';
 import '../widgets/auth_app_bar.dart';
 import '../widgets/auth_error_dialog.dart';
-import '../widgets/auth_form_field.dart';
+import '../../../shared/widgets/default_text_form_field.dart';
 import 'login_page.dart';
 
 class SignUpPage extends StatelessWidget {
@@ -38,7 +38,7 @@ class SignUpPage extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: 25.h),
-                AuthFormField(
+                DefaultTextFormField(
                   label: 'Full Name',
                   hint: 'Enter your Name',
                   onChanged: (name) => cubit.signUpSchema.name = name,
@@ -50,7 +50,7 @@ class SignUpPage extends StatelessWidget {
                   },
                 ),
                 SizedBox(height: 20.h),
-                AuthFormField(
+                DefaultTextFormField(
                   label: 'Email',
                   hint: 'Enter your E-mail',
                   onChanged: (email) => cubit.signUpSchema.email = email,
@@ -112,7 +112,7 @@ class SignUpPage extends StatelessWidget {
                   builder: (context, state) {
                     return Column(
                       children: [
-                        AuthFormField(
+                        DefaultTextFormField(
                           label: 'Password',
                           hint: 'Enter password',
                           onChanged: (password) =>
@@ -135,7 +135,7 @@ class SignUpPage extends StatelessWidget {
                           },
                         ),
                         SizedBox(height: 20.h),
-                        AuthFormField(
+                        DefaultTextFormField(
                           label: 'Confirm Password',
                           hint: 'Re-enter password',
                           isHidden: cubit.passwordHidden,

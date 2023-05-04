@@ -4,7 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../widgets/auth_app_bar.dart';
 import '../../../shared/widgets/default_button.dart';
 import '../../../shared/widgets/footer.dart';
-import '../widgets/auth_form_field.dart';
+import '../../../shared/widgets/default_text_form_field.dart';
 
 class ResetPasswordPage extends StatelessWidget {
   const ResetPasswordPage({Key? key}) : super(key: key);
@@ -27,7 +27,7 @@ class ResetPasswordPage extends StatelessWidget {
               ),
             ),
             SizedBox(height: 35.h),
-            const AuthFormField(
+            const DefaultTextFormField(
               label: 'New Password',
               hint: 'Enter a new password',
             ),

@@ -1,3 +1,4 @@
+import 'package:book_store_web/features/author/pages/author_book_page.dart';
 import 'package:book_store_web/features/author/pages/author_books_page.dart';
 import 'package:book_store_web/models/book.dart';
 import 'package:go_router/go_router.dart';
@@ -71,7 +72,14 @@ final router = GoRouter(
     ),
     GoRoute(
       path: AuthorBooksPage.routeName,
-      builder: (context, state) => const AuthorBooksPage(),
+      builder: (context, state) =>  const AuthorBooksPage(),
+    ),
+    GoRoute(
+      path: AuthorBookPage.routeName,
+      builder: (context, state) {
+        Book book = state.extra as Book;
+        return AuthorBookPage(book: book);
+      },
     ),
   ],
   redirect: (context, state) async {

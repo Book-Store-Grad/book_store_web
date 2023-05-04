@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../styles/app_colors.dart';
+import '../../styles/app_colors.dart';
 
-class AuthFormField extends StatelessWidget {
+class DefaultTextFormField extends StatelessWidget {
   final String label;
   final String hint;
   final TextEditingController? controller;
@@ -13,8 +13,9 @@ class AuthFormField extends StatelessWidget {
   final bool? isHidden;
   final IconData? suffixIcon;
   final VoidCallback? onSuffixPressed;
+  final int? maxLines;
 
-  const AuthFormField({
+  const DefaultTextFormField({
     super.key,
     required this.label,
     required this.hint,
@@ -25,6 +26,7 @@ class AuthFormField extends StatelessWidget {
     this.isHidden = false,
     this.onSuffixPressed,
     this.suffixIcon,
+    this.maxLines =1 ,
   });
 
   @override
@@ -72,6 +74,7 @@ class AuthFormField extends StatelessWidget {
           onChanged: onChanged,
           validator: validator,
           obscureText: isHidden!,
+          maxLines: maxLines,
         ),
       ],
     );
