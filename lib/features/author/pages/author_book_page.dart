@@ -1,6 +1,11 @@
+import 'package:book_store_web/business_logic/author/author_cubit.dart';
+import 'package:book_store_web/features/author/pages/author_books_page.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../core/utils/asset_imgaes.dart';
 import '../../../models/book.dart';
@@ -159,7 +164,143 @@ class AuthorBookPage extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
                             MaterialButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                showDialog(
+                                  context: context,
+                                  builder: (context) => AlertDialog(
+                                    title: Text(
+                                      'Are you sure to delete the book?',
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.w500,
+                                        fontSize: 17.sp,
+                                      ),
+                                    ),
+                                    content: Row(
+                                      children: [
+                                        MaterialButton(
+                                          onPressed: () {
+                                            context.pop();
+                                          },
+                                          color: Colors.grey,
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(10.r),
+                                          ),
+                                          padding: const EdgeInsets.all(18).r,
+                                          minWidth: 135.w,
+                                          child: Text(
+                                            'No',
+                                            style: TextStyle(
+                                              fontWeight: FontWeight.w500,
+                                              color: Colors.white,
+                                              fontSize: 16.sp,
+                                            ),
+                                          ),
+                                        ),
+                                        SizedBox(width: 15.w),
+                                        BlocConsumer<AuthorCubit, AuthorState>(
+                                          listener: (context, state) {
+                                            if (state
+                                                is DeleteBookSuccessState) {
+                                              Future.delayed(
+                                                const Duration(seconds: 1),
+                                                () {
+                                                  context.go(AuthorBooksPage.routeName);
+                                                },
+                                              );
+                                            }
+                                          },
+                                          builder: (context, state) {
+                                            AuthorCubit cubit =
+                                                BlocProvider.of<AuthorCubit>(
+                                                    context);
+                                            return state
+                                                    is DeleteBookLoadingState
+                                                ? MaterialButton(
+                                                    onPressed: () {},
+                                                    color: AppColors.primary,
+                                                    shape:
+                                                        RoundedRectangleBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              10.r),
+                                                    ),
+                                                    padding:
+                                                        const EdgeInsets.all(18)
+                                                            .r,
+                                                    minWidth: 135.w,
+                                                    child: SizedBox(
+                                                      height: 20.h,
+                                                      width: 20.h,
+                                                      child:
+                                                          const CircularProgressIndicator(
+                                                        color: Colors.white,
+                                                      ),
+                                                    ),
+                                                  )
+                                                : state is DeleteBookSuccessState
+                                                    ? Row(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .end,
+                                                        children: [
+                                                          Icon(
+                                                            CupertinoIcons
+                                                                .checkmark_rectangle,
+                                                            size: 29.r,
+                                                            color: AppColors
+                                                                .primary,
+                                                          ),
+                                                          SizedBox(width: 8.w),
+                                                          Text(
+                                                            'Successfully deleted',
+                                                            style: TextStyle(
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w500,
+                                                              fontSize: 15.sp,
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      )
+                                                    : MaterialButton(
+                                                        onPressed: () {
+                                                          print(book.id);
+                                                          cubit.deleteBook(
+                                                            id: 19,
+                                                          );
+                                                        },
+                                                        color:
+                                                            AppColors.primary,
+                                                        shape:
+                                                            RoundedRectangleBorder(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(
+                                                                      10.r),
+                                                        ),
+                                                        padding:
+                                                            const EdgeInsets
+                                                                    .all(18)
+                                                                .r,
+                                                        minWidth: 135.w,
+                                                        child: Text(
+                                                          'Yes',
+                                                          style: TextStyle(
+                                                            fontWeight:
+                                                                FontWeight.w500,
+                                                            color: Colors.white,
+                                                            fontSize: 16.sp,
+                                                          ),
+                                                        ),
+                                                      );
+                                          },
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                );
+                              },
                               color: AppColors.primary,
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10.r),

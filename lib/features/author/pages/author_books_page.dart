@@ -20,15 +20,14 @@ class AuthorBooksPage extends StatelessWidget {
     return BlocConsumer<AuthorCubit, AuthorState>(
       listener: (context, state) {},
       builder: (context, state) {
-        AuthorCubit cubit = BlocProvider.of<AuthorCubit>(context, listen: false);
         return Scaffold(
           appBar: appBar(context, isAuthor: true),
           body: SingleChildScrollView(
             child: Column(
               children: [
                 Padding(
-                  padding: EdgeInsets.symmetric(
-                      horizontal: 125.w, vertical: 40.h),
+                  padding:
+                      EdgeInsets.symmetric(horizontal: 125.w, vertical: 40.h),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -46,12 +45,7 @@ class AuthorBooksPage extends StatelessWidget {
                             onPressed: () {
                               showDialog(
                                 context: context,
-                                builder: (context) =>
-                                    AddBookDialog(
-                                      onSubmit: () {
-                                        cubit.addBook();
-                                      },
-                                    ),
+                                builder: (context) => const AddBookDialog(),
                               );
                             },
                             color: AppColors.blueButtonColor,

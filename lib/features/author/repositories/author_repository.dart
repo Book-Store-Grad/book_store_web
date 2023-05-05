@@ -10,13 +10,31 @@ class AuthorRepository {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String? token = prefs.getString('token');
     Response response = await Dio().post(
-      ApiConstants.addBook,
+      ApiConstants.book,
       data: data,
       options: Options(
         validateStatus: (_) => true,
         headers: {
           'Authorization': 'Bearer $token',
         }
+
+      ),
+    );
+    return response;
+  }
+
+  Future<Response> deleteBook({
+    required int id,
+  }) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? token = prefs.getString('token');
+    Response response = await Dio().delete(
+      '${ApiConstants.book}/43',
+      options: Options(
+          validateStatus: (_) => true,
+          headers: {
+            'Authorization': 'Bearer $token',
+          }
 
       ),
     );

@@ -1,5 +1,3 @@
-import 'package:book_store_web/features/cart/pages/cart_page.dart';
-import 'package:book_store_web/features/favorites/pages/favorites_page.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -8,6 +6,8 @@ import 'package:go_router/go_router.dart';
 import '../../../core/utils/asset_imgaes.dart';
 import '../../../shared/widgets/nav_bar.dart';
 import '../../../styles/app_colors.dart';
+import '../../cart/pages/cart_page.dart';
+import '../../favorites/pages/favorites_page.dart';
 
 PreferredSizeWidget appBar(BuildContext context, {bool? isAuthor}) => AppBar(
       toolbarHeight: 70.h,
