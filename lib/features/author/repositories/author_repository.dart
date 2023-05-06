@@ -29,7 +29,7 @@ class AuthorRepository {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String? token = prefs.getString('token');
     Response response = await Dio().delete(
-      '${ApiConstants.book}/43',
+      '${ApiConstants.book}/$id',
       options: Options(
           validateStatus: (_) => true,
           headers: {

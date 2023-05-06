@@ -5,7 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../business_logic/home/home_cubit.dart';
 import '../../../shared/widgets/footer.dart';
-import '../widgets/app_bar.dart';
+import '../../../shared/widgets/app_bar.dart';
 import '../widgets/home_section.dart';
 import '../widgets/search_item.dart';
 import '../widgets/search_section.dart';

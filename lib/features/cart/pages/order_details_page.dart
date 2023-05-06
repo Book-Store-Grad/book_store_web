@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../shared/widgets/footer.dart';
-import '../../home/widgets/app_bar.dart';
+import '../../../shared/widgets/app_bar.dart';
 import '../widgets/order_item.dart';
 
 class OrderDetailsPage extends StatelessWidget {

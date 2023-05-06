@@ -25,7 +25,7 @@ class LoginCubit extends Cubit<LoginState> {
   LoginSchema loginSchema = LoginSchema(email: '', password: '');
   final loginFormKey = GlobalKey<FormState>();
   LoginRepository loginRepository = LoginRepository();
-  late final User user;
+  User? user;
 
   Future<void> loginUser() async {
     emit(LoginLoadingState());
@@ -35,11 +35,27 @@ class LoginCubit extends Cubit<LoginState> {
     if (response.statusCode == 200) {
       user = User.fromJson(response.data);
       SharedPreferences prefs = await SharedPreferences.getInstance();
-      await prefs.setString('token', user.accessToken!);
-      await prefs.setString('role', user.role!);
-      emit(LoginSuccessState(user.role!));
+      await prefs.setString('token', user!.accessToken!);
+      await prefs.setString('role', user!.role!);
+      emit(LoginSuccessState(user!.role!));
     } else if (response.statusCode == 400) {
       emit(LoginFailureState(response.data["detail"]));
     }
+  }
+
+  logoutUser() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    try {
+      await prefs.setString('token', '');
+      await prefs.setString('role', '');
+      user = null;
+      emit(LogoutState());
+      Future.delayed(
+        const Duration(seconds: 2),
+        () {
+          emit(LoginInitial());
+        },
+      );
+    } catch (e) {}
   }
 }

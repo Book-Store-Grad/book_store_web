@@ -1,5 +1,5 @@
 import 'package:book_store_web/features/favorites/widgets/favorite_item.dart';
-import 'package:book_store_web/features/home/widgets/app_bar.dart';
+import 'package:book_store_web/shared/widgets/app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 

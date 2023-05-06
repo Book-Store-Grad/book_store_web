@@ -11,7 +11,7 @@ import '../../../core/utils/asset_imgaes.dart';
 import '../../../models/book.dart';
 import '../../../shared/widgets/footer.dart';
 import '../../../styles/app_colors.dart';
-import '../../home/widgets/app_bar.dart';
+import '../../../shared/widgets/app_bar.dart';
 
 class AuthorBookPage extends StatelessWidget {
   final Book book;
@@ -205,7 +205,8 @@ class AuthorBookPage extends StatelessWidget {
                                               Future.delayed(
                                                 const Duration(seconds: 1),
                                                 () {
-                                                  context.go(AuthorBooksPage.routeName);
+                                                  context.go(AuthorBooksPage
+                                                      .routeName);
                                                 },
                                               );
                                             }
@@ -265,7 +266,6 @@ class AuthorBookPage extends StatelessWidget {
                                                       )
                                                     : MaterialButton(
                                                         onPressed: () {
-                                                          print(book.id);
                                                           cubit.deleteBook(
                                                             id: 19,
                                                           );

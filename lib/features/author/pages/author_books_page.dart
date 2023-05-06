@@ -6,7 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../models/book.dart';
 import '../../../shared/widgets/footer.dart';
 import '../../../styles/app_colors.dart';
-import '../../home/widgets/app_bar.dart';
+import '../../../shared/widgets/app_bar.dart';
 import '../widgets/add_book_dialog.dart';
 import '../widgets/author_book.dart';
 

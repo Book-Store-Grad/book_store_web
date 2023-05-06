@@ -5,7 +5,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../../shared/widgets/footer.dart';
 import '../../../styles/app_colors.dart';
-import '../../home/widgets/app_bar.dart';
+import '../../../shared/widgets/app_bar.dart';
 import '../widgets/cart_item.dart';
 import 'checkout_page.dart';
 
