@@ -1,5 +1,9 @@
+import 'package:book_store_web/business_logic/cart/cart_cubit.dart';
+import 'package:book_store_web/features/cart/widgets/cart_skeleton.dart';
+import 'package:book_store_web/models/cart.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
@@ -9,10 +13,27 @@ import '../../../shared/widgets/app_bar.dart';
 import '../widgets/cart_item.dart';
 import 'checkout_page.dart';
 
-class CartPage extends StatelessWidget {
+class CartPage extends StatefulWidget {
   const CartPage({Key? key}) : super(key: key);
 
   static const String routeName = '/cart';
+
+  @override
+  State<CartPage> createState() => _CartPageState();
+}
+
+class _CartPageState extends State<CartPage> {
+  List<Cart> cartItems = [];
+
+  void getAllCart() async {
+    await BlocProvider.of<CartCubit>(context).getAllCartItems();
+  }
+
+  @override
+  void initState() {
+    getAllCart();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -71,13 +92,30 @@ class CartPage extends StatelessWidget {
                 child: Column(
                   children: [
                     SizedBox(height: 45.h),
-                    ListView.separated(
-                      itemBuilder: (context, index) => const CartItem(),
-                      separatorBuilder: (context, index) =>
-                          SizedBox(height: 30.h),
-                      itemCount: 5,
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
+                    BlocConsumer<CartCubit, CartState>(
+                      listener: (context, state) {},
+                      builder: (context, state) {
+                        if (state is GetAllCartSuccess) {
+                          for (Cart cartItem in state.cartItems!) {
+                            cartItems.add(cartItem);
+                          }
+                        }
+                        return ListView.separated(
+                          itemBuilder: (context, index) => cartItems.isEmpty
+                              ? const CartSkeleton()
+                              : CartItem(
+                                  bookId: cartItems[index].bookId!,
+                                  bookName: cartItems[index].bookName!,
+                                  bookDescription:
+                                      cartItems[index].bookDescription!,
+                                ),
+                          separatorBuilder: (context, index) =>
+                              SizedBox(height: 30.h),
+                          itemCount: cartItems.isEmpty ? 5 : cartItems.length,
+                          shrinkWrap: true,
+                          physics: const NeverScrollableScrollPhysics(),
+                        );
+                      },
                     ),
                   ],
                 ),

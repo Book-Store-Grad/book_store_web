@@ -2,7 +2,7 @@ class Book {
   int? id;
   String? name;
   String? description;
-  String? genre;
+  String? category;
   String? price;
 
   Book();
@@ -11,7 +11,7 @@ class Book {
     id = json["b_id"];
     name = json["b_name"];
     description = json["b_description"];
-    genre = json["b_genre"];
+    category = json["b_genre"];
     price = json["b_price"];
   }
 }

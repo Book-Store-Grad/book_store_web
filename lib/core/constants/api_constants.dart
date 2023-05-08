@@ -6,4 +6,6 @@ class ApiConstants {
   static const String resetPassword = "$baseUrl/auth/reset-password";
   static const String getAllBooks = "$baseUrl/book/all";
   static const String book = "$baseUrl/book";
+  static const String getAllCart = '$baseUrl/cart/all';
+  static const String cart = '$baseUrl/cart';
 }

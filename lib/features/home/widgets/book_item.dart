@@ -19,7 +19,9 @@ class BookItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => context.go(BookPage.routeName, extra: book),
+      onTap: () {
+        context.goNamed(BookPage.name, params: {'id': book.id.toString()});
+      },
       child: Card(
         elevation: 4,
         shape: RoundedRectangleBorder(

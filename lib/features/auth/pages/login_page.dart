@@ -73,6 +73,11 @@ class LoginPage extends StatelessWidget {
                       }
                       return null;
                     },
+                    onFieldSubmitted: (_) {
+                      if (cubit.loginFormKey.currentState!.validate()) {
+                        cubit.loginUser();
+                      }
+                    },
                   );
                 },
               ),

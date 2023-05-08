@@ -1,6 +1,5 @@
 import 'package:book_store_web/features/author/pages/author_book_page.dart';
 import 'package:book_store_web/features/author/pages/author_books_page.dart';
-import 'package:book_store_web/models/book.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -44,10 +43,12 @@ final router = GoRouter(
       builder: (context, state) => const HomePage(),
     ),
     GoRoute(
+      name: BookPage.name,
       path: BookPage.routeName,
       builder: (context, state) {
-        Book book = state.extra as Book;
-        return BookPage(book: book);
+        return BookPage(
+          id: int.parse(state.params['id']!),
+        );
       },
     ),
     GoRoute(
@@ -72,24 +73,26 @@ final router = GoRouter(
     ),
     GoRoute(
       path: AuthorBooksPage.routeName,
-      builder: (context, state) =>  const AuthorBooksPage(),
+      builder: (context, state) => const AuthorBooksPage(),
     ),
     GoRoute(
+      name: AuthorBookPage.name,
       path: AuthorBookPage.routeName,
       builder: (context, state) {
-        Book book = state.extra as Book;
-        return AuthorBookPage(book: book);
+        return AuthorBookPage(
+          id: int.parse(state.params['id']!),
+        );
       },
     ),
   ],
   redirect: (context, state) async {
-    if(state.location == '/') {
+    if (state.location == '/') {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       String? token = prefs.getString('token');
       String? role = prefs.getString('role');
       bool isLogged = token != null && token != '';
-      if(isLogged) {
-        if(role!.toLowerCase() == 'author') {
+      if (isLogged) {
+        if (role!.toLowerCase() == 'author') {
           return AuthorBooksPage.routeName;
         } else {
           return HomePage.routeName;

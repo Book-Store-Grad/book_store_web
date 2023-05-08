@@ -1,3 +1,4 @@
+import 'package:book_store_web/core/constants/app_constants.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -37,6 +38,7 @@ class LoginCubit extends Cubit<LoginState> {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       await prefs.setString('token', user!.accessToken!);
       await prefs.setString('role', user!.role!);
+      token = user!.role!;
       emit(LoginSuccessState(user!.role!));
     } else if (response.statusCode == 400) {
       emit(LoginFailureState(response.data["detail"]));
@@ -48,6 +50,7 @@ class LoginCubit extends Cubit<LoginState> {
     try {
       await prefs.setString('token', '');
       await prefs.setString('role', '');
+      token = '';
       user = null;
       emit(LogoutState());
       Future.delayed(

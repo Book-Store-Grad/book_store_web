@@ -1,6 +1,6 @@
+import 'package:book_store_web/shared/widgets/default_skeleton.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:skeletons/skeletons.dart';
 
 import '../../../models/book.dart';
 import 'book_item.dart';
@@ -91,14 +91,7 @@ class _HomeSectionState extends State<HomeSection> {
                 child: ListView.separated(
                   scrollDirection: Axis.horizontal,
                   itemBuilder: (context, index) => widget.books.isEmpty
-                      ? SkeletonAvatar(
-                          style: SkeletonAvatarStyle(
-                            width: 150.w,
-                            height: 210.h,
-                            borderRadius: BorderRadius.circular(6).r,
-
-                          ),
-                        )
+                      ? DefaultSkeleton(height: 210.h, width: 150.w)
                       : BookItem(
                           book: widget.books[index],
                         ),

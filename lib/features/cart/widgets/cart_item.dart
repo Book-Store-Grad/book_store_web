@@ -1,13 +1,22 @@
+import 'package:book_store_web/business_logic/cart/cart_cubit.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../core/utils/asset_imgaes.dart';
 import '../../../styles/app_colors.dart';
 
 class CartItem extends StatelessWidget {
+  final int bookId;
+  final String bookName;
+  final String bookDescription;
+
   const CartItem({
     super.key,
+    required this.bookId,
+    required this.bookName,
+    required this.bookDescription,
   });
 
   @override
@@ -27,7 +36,7 @@ class CartItem extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Your Cart',
+                bookName,
                 style: TextStyle(
                   fontSize: 22.sp,
                   fontWeight: FontWeight.bold,
@@ -35,7 +44,7 @@ class CartItem extends StatelessWidget {
               ),
               SizedBox(height: 10.h),
               Text(
-                'This is book This is book details for this book this is book details fa This is book details for this book this is book details fa details for this book this is book details fake data to fill this text in this page in this website or application',
+                bookDescription,
                 style: TextStyle(
                   fontSize: 18.sp,
                 ),
@@ -47,7 +56,9 @@ class CartItem extends StatelessWidget {
         ),
         const Spacer(),
         InkWell(
-          onTap: () {},
+          onTap: () {
+            BlocProvider.of<CartCubit>(context, listen: false).removeFromCart(bookId: bookId);
+          },
           hoverColor: AppColors.primary,
           borderRadius: BorderRadius.circular(50).r,
           child: CircleAvatar(
