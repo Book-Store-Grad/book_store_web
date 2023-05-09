@@ -7,7 +7,7 @@ class CartSkeleton extends StatelessWidget {
   const CartSkeleton({
     super.key,
   });
-//
+
   @override
   Widget build(BuildContext context) {
     return Row(
