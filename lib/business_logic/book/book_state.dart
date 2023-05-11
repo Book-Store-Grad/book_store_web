@@ -12,3 +12,7 @@ class GetBookSuccessState extends BookState {
 
   GetBookSuccessState({required this.book});
 }
+
+class GetBookFileLoadingState extends BookState {}
+
+class GetBookFileSuccessState extends BookState {}

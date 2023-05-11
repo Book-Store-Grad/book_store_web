@@ -309,10 +309,7 @@ class _BookPageState extends State<BookPage> {
                                   builder: (context, state) {
                                     return MaterialButton(
                                       onPressed: () {
-                                        BlocProvider.of<CartCubit>(context)
-                                            .addToCart(
-                                          bookId: book!.id!,
-                                        );
+                                        BlocProvider.of<BookCubit>(context).getBookFile(bookId: book!.id!);
                                       },
                                       color: const Color(0xff00A3FF),
                                       shape: RoundedRectangleBorder(

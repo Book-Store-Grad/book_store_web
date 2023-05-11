@@ -1,8 +1,13 @@
+
+import 'dart:html';
+
 import 'package:bloc/bloc.dart';
 import 'package:book_store_web/features/book/repository/book_repository.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'dart:async';
 
+import '../../core/constants/api_constants.dart';
 import '../../models/book.dart';
 
 part 'book_state.dart';
@@ -23,5 +28,14 @@ class BookCubit extends Cubit<BookState> {
     emit(
       GetBookSuccessState(book: book),
     );
+  }
+
+  // Get Book File
+  Future<void> getBookFile({
+    required int bookId,
+  }) async {
+    emit(GetBookFileLoadingState());
+    // Response response = await bookRepository.getBookFile(bookId: bookId);
+    emit(GetBookFileSuccessState());
   }
 }
