@@ -7,13 +7,7 @@ class CartInitial extends CartState {}
 
 class GetAllCartLoading extends CartState {}
 
-class GetAllCartSuccess extends CartState {
-  final List<Cart>? cartItems;
-
-  GetAllCartSuccess({
-    required this.cartItems,
-  });
-}
+class GetAllCartSuccess extends CartState {}
 
 class AddToCartLoading extends CartState {}
 

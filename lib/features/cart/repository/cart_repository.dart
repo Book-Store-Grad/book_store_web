@@ -18,11 +18,11 @@ class CartRepository {
   }
 
   Future<Response> addToCart({
-    required int bookId,
+    required int cartId,
   }) async {
     return await Dio().post(
       ApiConstants.cart,
-      data: {"book_id": bookId},
+      data: {"book_id": cartId},
       options: Options(
         contentType: Headers.jsonContentType,
         validateStatus: (_) => true,
@@ -34,10 +34,10 @@ class CartRepository {
   }
 
   Future<Response> removeFromCart({
-    required int bookId,
+    required int cartId,
   }) async {
     return await Dio().delete(
-      '${ApiConstants.cart}/$bookId',
+      '${ApiConstants.cart}/$cartId',
       options: Options(
         contentType: Headers.jsonContentType,
         validateStatus: (_) => true,

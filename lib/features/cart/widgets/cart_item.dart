@@ -8,6 +8,7 @@ import '../../../core/utils/asset_imgaes.dart';
 import '../../../styles/app_colors.dart';
 
 class CartItem extends StatelessWidget {
+  final int cartId;
   final int bookId;
   final String bookName;
   final String bookDescription;
@@ -16,7 +17,7 @@ class CartItem extends StatelessWidget {
     super.key,
     required this.bookId,
     required this.bookName,
-    required this.bookDescription,
+    required this.bookDescription, required this.cartId,
   });
 
   @override
@@ -57,7 +58,7 @@ class CartItem extends StatelessWidget {
         const Spacer(),
         InkWell(
           onTap: () {
-            BlocProvider.of<CartCubit>(context, listen: false).removeFromCart(bookId: bookId);
+            BlocProvider.of<CartCubit>(context, listen: false).removeFromCart(cartId: cartId);
           },
           hoverColor: AppColors.primary,
           borderRadius: BorderRadius.circular(50).r,
