@@ -15,10 +15,11 @@ class CartCubit extends Cubit<CartState> {
   // Cart Operations
 
   // Get All Cart Items
+  List<Cart> cartItems = [];
+
   Future<void> getAllCartItems() async {
     emit(GetAllCartLoading());
     Response response = await cartRepository.getAllCartItems();
-    List<Cart> cartItems = [];
     response.data["content"]["cart_items"].forEach(
       (e) => cartItems.add(Cart.fromJson(e)),
     );
@@ -47,12 +48,16 @@ class CartCubit extends Cubit<CartState> {
     Response response = await cartRepository.removeFromCart(bookId: bookId);
     if (response.statusCode == 200) {
       print("removed from cart done");
-      emit(RemoveFromCartLoading());
+      emit(RemoveFromCartSuccess());
+      getAllCartItems();
     } else {
       print("remove from cart error");
-      print(response.data);
-      print(response.statusCode);
-      print(bookId);
+      emit(RemoveFromCartError());
     }
   }
+
+  void refreshPage() {
+    emit(CartRefresh());
+  }
 }
+

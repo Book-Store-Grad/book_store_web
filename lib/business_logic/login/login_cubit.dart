@@ -14,7 +14,6 @@ class LoginCubit extends Cubit<LoginState> {
   LoginCubit() : super(LoginInitial());
 
   // Password Show / Hide
-
   bool passwordHidden = true;
 
   void switchPassword() {
@@ -60,5 +59,61 @@ class LoginCubit extends Cubit<LoginState> {
         },
       );
     } catch (e) {}
+  }
+
+  final TextEditingController forgotPasswordEmailController =
+      TextEditingController();
+
+  final TextEditingController verificationCode = TextEditingController();
+
+  String enteredOTP = '';
+
+  Future<void> forgotPassword() async {
+    emit(ForgotPasswordLoadingState());
+    try {
+      Response response = await loginRepository.forgotPassword(
+        email: forgotPasswordEmailController.text,
+      );
+      verificationCode.text = response.data["content"]["code"].toString();
+      emit(ForgotPasswordSuccessState());
+      Future.delayed(
+        const Duration(seconds: 5),
+        () => emit(
+          LoginInitial(),
+        ),
+      );
+    } catch (e) {
+      print(e.toString());
+      emit(ForgotPasswordFailureState());
+    }
+  }
+
+  void checkOTP({required String oTP}) {
+    emit(VerifyCodeLoadingState());
+    Future.delayed(
+      const Duration(milliseconds: 2000),
+      () {
+        if (oTP == verificationCode.text) {
+          emit(VerifyCodeSuccessState());
+        } else {
+          emit(VerifyCodeFailureState());
+        }
+      },
+    );
+  }
+
+  final TextEditingController newPasswordController = TextEditingController();
+
+  Future<void> resetPassword() async {
+    emit(ResetPasswordLoadingState());
+    try {
+      Response response = await loginRepository.resetPassword(
+        code: verificationCode.text,
+        newPassword: newPasswordController.text,
+      );
+      emit(ResetPasswordSuccessState());
+    } catch (e) {
+      emit(ResetPasswordFailureState());
+    }
   }
 }

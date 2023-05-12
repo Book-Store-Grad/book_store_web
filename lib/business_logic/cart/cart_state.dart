@@ -22,3 +22,7 @@ class AddToCartSuccess extends CartState {}
 class RemoveFromCartLoading extends CartState {}
 
 class RemoveFromCartSuccess extends CartState {}
+
+class RemoveFromCartError extends CartState {}
+
+class CartRefresh extends CartState {}

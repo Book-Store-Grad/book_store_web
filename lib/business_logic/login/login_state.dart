@@ -22,3 +22,21 @@ class LoginFailureState extends LoginState {
 }
 
 class LogoutState extends LoginState {}
+
+class ForgotPasswordLoadingState extends LoginState {}
+
+class ForgotPasswordSuccessState extends LoginState {}
+
+class ForgotPasswordFailureState extends LoginState {}
+
+class VerifyCodeLoadingState extends LoginState {}
+
+class VerifyCodeSuccessState extends LoginState {}
+
+class VerifyCodeFailureState extends LoginState {}
+
+class ResetPasswordLoadingState extends LoginState {}
+
+class ResetPasswordSuccessState extends LoginState {}
+
+class ResetPasswordFailureState extends LoginState {}

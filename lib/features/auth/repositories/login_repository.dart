@@ -6,7 +6,7 @@ class LoginRepository {
   Future<Response> loginUser({
     required Object? data,
   }) async {
-    Response response = await Dio().post(
+    return await Dio().post(
       ApiConstants.login,
       data: data,
       options: Options(
@@ -14,6 +14,40 @@ class LoginRepository {
         validateStatus: (_) => true,
       ),
     );
-    return response;
+    ;
   }
+
+  Future<Response> forgotPassword({
+    required String email,
+  }) async {
+    return await Dio().post(
+      ApiConstants.forgetPassword,
+      data: {
+        "email": email,
+      },
+      options: Options(
+        contentType: Headers.jsonContentType,
+        validateStatus: (_) => true,
+      ),
+    );
+  }
+
+  Future<Response> resetPassword({
+    required String code,
+    required String newPassword,
+  }) async {
+    return await Dio().post(
+      ApiConstants.resetPassword,
+      data: {
+        "code": code,
+        "password": newPassword
+      },
+      options: Options(
+        contentType: Headers.jsonContentType,
+        validateStatus: (_) => true,
+      ),
+    );
+  }
+
+
 }

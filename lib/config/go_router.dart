@@ -1,3 +1,4 @@
+import 'package:book_store_web/features/auth/pages/verification_page.dart';
 import 'package:book_store_web/features/author/pages/author_book_page.dart';
 import 'package:book_store_web/features/author/pages/author_books_page.dart';
 import 'package:go_router/go_router.dart';
@@ -74,6 +75,10 @@ final router = GoRouter(
     GoRoute(
       path: AuthorBooksPage.routeName,
       builder: (context, state) => const AuthorBooksPage(),
+    ),
+    GoRoute(
+      path: VerificationPage.routeName,
+      builder: (context, state) => const VerificationPage(),
     ),
     GoRoute(
       name: AuthorBookPage.name,

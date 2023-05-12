@@ -23,8 +23,6 @@ class CartPage extends StatefulWidget {
 }
 
 class _CartPageState extends State<CartPage> {
-  List<Cart> cartItems = [];
-
   void getAllCart() async {
     await BlocProvider.of<CartCubit>(context).getAllCartItems();
   }
@@ -37,6 +35,7 @@ class _CartPageState extends State<CartPage> {
 
   @override
   Widget build(BuildContext context) {
+    List<Cart> cartItems = BlocProvider.of<CartCubit>(context).cartItems;
     return Scaffold(
       appBar: appBar(context),
       body: SingleChildScrollView(
@@ -96,8 +95,12 @@ class _CartPageState extends State<CartPage> {
                       listener: (context, state) {},
                       builder: (context, state) {
                         if (state is GetAllCartSuccess) {
+                          cartItems.clear();
                           for (Cart cartItem in state.cartItems!) {
                             cartItems.add(cartItem);
+                            if (state.cartItems!.indexOf(cartItem) == state.cartItems!.length - 1 ) {
+                              BlocProvider.of<CartCubit>(context).refreshPage();
+                            }
                           }
                         }
                         return ListView.separated(

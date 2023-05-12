@@ -1,6 +1,6 @@
 class Cart {
-  int? cartId;
-  int? bookId;
+  dynamic cartId;
+  dynamic bookId;
   String? createdOn;
   String? bookName;
   String? bookDescription;
