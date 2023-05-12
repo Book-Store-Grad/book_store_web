@@ -20,7 +20,6 @@ class VerificationPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: authAppBar(context),
       body: BlocConsumer<LoginCubit, LoginState>(
         listener: (context, state) {
           if (state is VerifyCodeSuccessState) {
@@ -89,7 +88,6 @@ class VerificationPage extends StatelessWidget {
           );
         },
       ),
-      bottomNavigationBar: const Footer(),
     );
   }
 }

@@ -22,7 +22,6 @@ class SignUpPage extends StatelessWidget {
   Widget build(BuildContext context) {
     SignUpCubit cubit = BlocProvider.of<SignUpCubit>(context, listen: false);
     return Scaffold(
-      appBar: authAppBar(context),
       body: SingleChildScrollView(
         child: Center(
           child: Form(
@@ -293,7 +292,6 @@ class SignUpPage extends StatelessWidget {
           ),
         ),
       ),
-      bottomNavigationBar: const Footer(),
     );
   }
 }

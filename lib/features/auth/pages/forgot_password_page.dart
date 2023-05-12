@@ -20,7 +20,6 @@ class ForgotPasswordPage extends StatelessWidget {
   Widget build(BuildContext context) {
     LoginCubit cubit = BlocProvider.of<LoginCubit>(context, listen: false);
     return Scaffold(
-      appBar: authAppBar(context),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -83,7 +82,6 @@ class ForgotPasswordPage extends StatelessWidget {
           ],
         ),
       ),
-      bottomNavigationBar: const Footer(),
     );
   }
 }

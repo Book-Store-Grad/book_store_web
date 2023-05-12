@@ -19,7 +19,6 @@ class ResetPasswordPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: authAppBar(context),
       body: BlocConsumer<LoginCubit, LoginState>(
         listener: (context, state) {},
         builder: (context, state) {
@@ -88,7 +87,6 @@ class ResetPasswordPage extends StatelessWidget {
           );
         },
       ),
-      bottomNavigationBar: const Footer(),
     );
   }
 }
