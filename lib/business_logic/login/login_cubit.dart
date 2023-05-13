@@ -37,7 +37,8 @@ class LoginCubit extends Cubit<LoginState> {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       await prefs.setString('token', user!.accessToken!);
       await prefs.setString('role', user!.role!);
-      token = user!.role!;
+      token = user!.accessToken!;
+      role = user!.role!;
       emit(LoginSuccessState(user!.role!));
     } else if (response.statusCode == 400) {
       emit(LoginFailureState(response.data["detail"]));
@@ -46,19 +47,18 @@ class LoginCubit extends Cubit<LoginState> {
 
   logoutUser() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    try {
-      await prefs.setString('token', '');
-      await prefs.setString('role', '');
-      token = '';
-      user = null;
-      emit(LogoutState());
-      Future.delayed(
-        const Duration(seconds: 2),
-        () {
-          emit(LoginInitial());
-        },
-      );
-    } catch (e) {}
+    await prefs.setString('token', '');
+    await prefs.setString('role', '');
+    token = '';
+    role = '';
+    user = null;
+    emit(LogoutState());
+    Future.delayed(
+      const Duration(seconds: 2),
+      () {
+        emit(LoginInitial());
+      },
+    );
   }
 
   final TextEditingController forgotPasswordEmailController =
@@ -106,7 +106,7 @@ class LoginCubit extends Cubit<LoginState> {
   Future<void> resetPassword() async {
     emit(ResetPasswordLoadingState());
     try {
-      Response response = await loginRepository.resetPassword(
+      await loginRepository.resetPassword(
         code: verificationCode.text,
         newPassword: newPasswordController.text,
       );

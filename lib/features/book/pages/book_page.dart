@@ -46,7 +46,7 @@ class _BookPageState extends State<BookPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appBar(context),
+      appBar: appBar(context, isAuthor: false),
       body: SingleChildScrollView(
         child: BlocConsumer<BookCubit, BookState>(
           listener: (context, state) {
@@ -309,7 +309,7 @@ class _BookPageState extends State<BookPage> {
                                   builder: (context, state) {
                                     return MaterialButton(
                                       onPressed: () {
-                                        BlocProvider.of<BookCubit>(context).getBookFile(bookId: book!.id!);
+                                        BlocProvider.of<CartCubit>(context).addToCart(bookId: book!.id!);
                                       },
                                       color: const Color(0xff00A3FF),
                                       shape: RoundedRectangleBorder(

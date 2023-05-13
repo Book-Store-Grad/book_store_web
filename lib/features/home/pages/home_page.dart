@@ -19,7 +19,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     HomeCubit cubit = BlocProvider.of<HomeCubit>(context, listen: false);
     return Scaffold(
-      appBar: appBar(context),
+      appBar: appBar(context, isAuthor: false),
       body: SingleChildScrollView(
         controller: cubit.scrollController,
         child: BlocConsumer<HomeCubit, HomeState>(

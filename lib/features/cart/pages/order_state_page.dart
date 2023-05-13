@@ -13,7 +13,7 @@ class OrderStatePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appBar(context),
+      appBar: appBar(context, isAuthor: false),
       body: SingleChildScrollView(
         child: Center(
           child: Padding(

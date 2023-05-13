@@ -47,7 +47,7 @@ class _AuthorBookPageState extends State<AuthorBookPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appBar(context),
+      appBar: appBar(context, isAuthor: false),
       body: SingleChildScrollView(
         child: BlocConsumer<BookCubit, BookState>(
           listener: (context, state) {

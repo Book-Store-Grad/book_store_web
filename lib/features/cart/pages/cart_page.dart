@@ -39,7 +39,7 @@ class _CartPageState extends State<CartPage> {
       builder: (context, state) {
         CartCubit cubit = BlocProvider.of<CartCubit>(context);
         return Scaffold(
-          appBar: appBar(context),
+          appBar: appBar(context, isAuthor: false),
           body: SingleChildScrollView(
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 125.w, vertical: 40.h),

@@ -25,6 +25,9 @@ class CartCubit extends Cubit<CartState> {
     response.data["content"]["cart_items"].forEach(
       (e) => cartItems.add(Cart.fromJson(e)),
     );
+    for(var book in cartItems) {
+      print(book.bookName);
+    }
     emit(GetAllCartSuccess());
   }
 

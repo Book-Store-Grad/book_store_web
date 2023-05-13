@@ -24,6 +24,7 @@ void main() async{
   setPathUrlStrategy();
   SharedPreferences prefs = await SharedPreferences.getInstance();
   token = prefs.getString('token') ?? '';
+  role = prefs.getString('role') ?? '';
   runApp(const BookStore());
 }
 
