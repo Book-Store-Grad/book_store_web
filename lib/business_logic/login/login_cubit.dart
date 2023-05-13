@@ -83,7 +83,6 @@ class LoginCubit extends Cubit<LoginState> {
         ),
       );
     } catch (e) {
-      print(e.toString());
       emit(ForgotPasswordFailureState());
     }
   }

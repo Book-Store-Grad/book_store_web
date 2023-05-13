@@ -6,11 +6,9 @@ import 'package:go_router/go_router.dart';
 
 import '../../../business_logic/sign_up/sign_up_cubit.dart';
 import '../../../shared/widgets/default_button.dart';
-import '../../../shared/widgets/footer.dart';
-import '../../../styles/app_colors.dart';
-import '../widgets/auth_app_bar.dart';
-import '../widgets/auth_error_dialog.dart';
 import '../../../shared/widgets/default_text_form_field.dart';
+import '../../../styles/app_colors.dart';
+import '../widgets/auth_error_dialog.dart';
 import 'login_page.dart';
 
 class SignUpPage extends StatelessWidget {

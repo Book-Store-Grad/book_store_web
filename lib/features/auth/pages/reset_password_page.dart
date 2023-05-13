@@ -1,5 +1,6 @@
 import 'package:book_store_web/business_logic/login/login_cubit.dart';
 import 'package:book_store_web/features/auth/pages/login_page.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -39,6 +40,25 @@ class ResetPasswordPage extends StatelessWidget {
                   label: 'New Password',
                   hint: 'Enter a new password',
                   controller: cubit.newPasswordController,
+                  isHidden: cubit.passwordHidden,
+                  suffixIcon: cubit.passwordHidden ? CupertinoIcons.eye_slash : CupertinoIcons.eye,
+                  onSuffixPressed: () {
+                    cubit.switchPassword();
+                  },
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return "Please Enter Your Password";
+                    }
+                    if (value!.length < 6) {
+                      return "Please Enter strong password";
+                    }
+                    return null;
+                  },
+                  onFieldSubmitted: (_) {
+                    if (cubit.loginFormKey.currentState!.validate()) {
+                      cubit.resetPassword();
+                    }
+                  },
                 ),
                 SizedBox(height: 65.h),
                 state is ResetPasswordLoadingState
@@ -76,7 +96,9 @@ class ResetPasswordPage extends StatelessWidget {
                           )
                         : DefaultButton(
                             onPressed: () {
-                              cubit.resetPassword();
+                              if (cubit.loginFormKey.currentState!.validate()) {
+                                cubit.resetPassword();
+                              }
                             },
                             height: 56.h,
                             width: 300.w,

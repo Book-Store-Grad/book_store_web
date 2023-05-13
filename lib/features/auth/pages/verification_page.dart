@@ -27,7 +27,8 @@ class VerificationPage extends StatelessWidget {
           }
         },
         builder: (context, state) {
-          LoginCubit cubit = BlocProvider.of<LoginCubit>(context, listen: false);
+          LoginCubit cubit =
+              BlocProvider.of<LoginCubit>(context, listen: false);
 
           return Center(
             child: Column(
@@ -73,16 +74,30 @@ class VerificationPage extends StatelessWidget {
                           cubit.checkOTP(oTP: pin.toString());
                         },
                       ),
+                      if (state is VerifyCodeFailureState)
+                        Padding(
+                          padding: const EdgeInsets.only(top: 15).h,
+                          child: Text(
+                            'Wrong Code, Try Again!',
+                            style: TextStyle(
+                              fontWeight: FontWeight.w500,
+                              fontSize: 17.sp,
+                              color: AppColors.primary,
+                            ),
+                          ),
+                        ),
                     ],
                   ),
                 ),
                 SizedBox(height: 40.h),
-                state is VerifyCodeLoadingState ? const CircularProgressIndicator() :  DefaultButton(
-                  onPressed: () {},
-                  height: 56.h,
-                  width: 300.w,
-                  text: 'Verify',
-                ),
+                state is VerifyCodeLoadingState
+                    ? const CircularProgressIndicator()
+                    : DefaultButton(
+                        onPressed: () {},
+                        height: 56.h,
+                        width: 300.w,
+                        text: 'Verify',
+                      ),
               ],
             ),
           );
@@ -91,4 +106,3 @@ class VerificationPage extends StatelessWidget {
     );
   }
 }
-
