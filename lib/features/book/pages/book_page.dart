@@ -1,3 +1,4 @@
+import 'package:book_store_web/business_logic/favourite/favourite_cubit.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -263,30 +264,54 @@ class _BookPageState extends State<BookPage> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: [
-                                InkWell(
-                                  onTap: () {},
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                      shape: BoxShape.circle,
-                                      boxShadow: [
-                                        BoxShadow(
-                                          color: const Color.fromRGBO(
-                                              0, 0, 0, 0.25),
-                                          spreadRadius: 2,
-                                          blurRadius: 4,
-                                          offset: Offset(0.w, 2.h),
-                                        ),
-                                      ],
-                                    ),
-                                    child: CircleAvatar(
-                                      backgroundColor: Colors.white,
-                                      radius: 28.r,
-                                      child: Icon(
-                                        CupertinoIcons.suit_heart,
-                                        color: Colors.red,
-                                        size: 24.r,
-                                      ),
-                                    ),
+                                BlocProvider(
+                                  create: (context) => FavouriteCubit(),
+                                  child: BlocConsumer<FavouriteCubit,
+                                      FavouriteState>(
+                                    listener: (context, state) {},
+                                    builder: (context, state) {
+                                      return InkWell(
+                                        onTap: () {
+                                          BlocProvider.of<FavouriteCubit>(
+                                                  context)
+                                              .addToFavourite(
+                                                  bookId: book!.id!);
+                                        },
+                                        child: state is AddToFavouriteLoading
+                                            ? SizedBox(
+                                                height: 20.h,
+                                                width: 20.w,
+                                                child:
+                                                    const CircularProgressIndicator(
+                                                  color: Colors.red,
+                                                ),
+                                              )
+                                            : Container(
+                                                decoration: BoxDecoration(
+                                                  shape: BoxShape.circle,
+                                                  boxShadow: [
+                                                    BoxShadow(
+                                                      color:
+                                                          const Color.fromRGBO(
+                                                              0, 0, 0, 0.25),
+                                                      spreadRadius: 2,
+                                                      blurRadius: 4,
+                                                      offset: Offset(0.w, 2.h),
+                                                    ),
+                                                  ],
+                                                ),
+                                                child: CircleAvatar(
+                                                  backgroundColor: Colors.white,
+                                                  radius: 28.r,
+                                                  child: Icon(
+                                                    CupertinoIcons.suit_heart,
+                                                    color: Colors.red,
+                                                    size: 24.r,
+                                                  ),
+                                                ),
+                                              ),
+                                      );
+                                    },
                                   ),
                                 ),
                                 book == null
@@ -309,7 +334,8 @@ class _BookPageState extends State<BookPage> {
                                   builder: (context, state) {
                                     return MaterialButton(
                                       onPressed: () {
-                                        BlocProvider.of<CartCubit>(context).addToCart(bookId: book!.id!);
+                                        BlocProvider.of<CartCubit>(context)
+                                            .addToCart(bookId: book!.id!);
                                       },
                                       color: const Color(0xff00A3FF),
                                       shape: RoundedRectangleBorder(

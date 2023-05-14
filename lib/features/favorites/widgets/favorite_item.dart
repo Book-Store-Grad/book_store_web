@@ -1,14 +1,18 @@
+import 'package:book_store_web/business_logic/favourite/favourite_cubit.dart';
+import 'package:book_store_web/features/book/pages/book_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../core/utils/asset_imgaes.dart';
 import '../../../styles/app_colors.dart';
 
 class FavoriteItem extends StatelessWidget {
-  const FavoriteItem({
-    super.key,
-  });
+  final int favId;
+  final int bookId;
+  const FavoriteItem({super.key, required this.favId, required this.bookId});
 
   @override
   Widget build(BuildContext context) {
@@ -26,16 +30,26 @@ class FavoriteItem extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                'Your Favorite',
-                style: TextStyle(
-                  fontSize: 22.sp,
-                  fontWeight: FontWeight.bold,
+              TextButton(
+                child: Text(
+                  "bookName",
+                  style: TextStyle(
+                    fontSize: 22.sp,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                onPressed: () {
+                  context.goNamed(BookPage.name, params: {'id': bookId.toString()});
+                },
+                style: TextButton.styleFrom(
+                  minimumSize: Size.zero,
+                  padding: EdgeInsets.zero,
+                  tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                 ),
               ),
               SizedBox(height: 10.h),
               Text(
-                'This is book This is book details for this book this is book details fa This is book details for this book this is book details fa details for this book this is book details fake data to fill this text in this page in this website or application',
+                "jjj",
                 style: TextStyle(
                   fontSize: 18.sp,
                 ),
@@ -47,7 +61,10 @@ class FavoriteItem extends StatelessWidget {
         ),
         const Spacer(),
         InkWell(
-          onTap: () {},
+          onTap: () {
+            BlocProvider.of<FavouriteCubit>(context, listen: false)
+                .removeFromFav(favId: favId);
+          },
           hoverColor: AppColors.primary,
           borderRadius: BorderRadius.circular(50).r,
           child: CircleAvatar(
