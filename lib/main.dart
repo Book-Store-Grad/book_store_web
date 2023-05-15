@@ -1,3 +1,5 @@
+import 'package:book_store_web/business_logic/profile/profile_cubit.dart';
+import 'package:book_store_web/network/remote/dio_helper.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -21,6 +23,7 @@ void main() async{
   if (kDebugMode) {
     Bloc.observer = MyBlocObserver();
   }
+  DioHelper.init();
   setPathUrlStrategy();
   SharedPreferences prefs = await SharedPreferences.getInstance();
   token = prefs.getString('token') ?? '';
@@ -56,6 +59,9 @@ class BookStore extends StatelessWidget {
           ),
           BlocProvider(
             create: (context) => CartCubit(),
+          ),
+          BlocProvider(
+            create: (context) => ProfileCubit(),
           ),
         ],
         child: MaterialApp.router(

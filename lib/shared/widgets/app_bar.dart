@@ -1,6 +1,7 @@
 import 'package:book_store_web/business_logic/login/login_cubit.dart';
 import 'package:book_store_web/core/constants/app_constants.dart';
 import 'package:book_store_web/features/auth/pages/login_page.dart';
+import 'package:book_store_web/features/profile/pages/profile_page.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -203,7 +204,7 @@ class MenuItems {
 
     switch (item) {
       case MenuItems.account:
-        //Do something
+        context.go(ProfilePage.routeName);
         break;
       case MenuItems.cart:
         context.go(CartPage.routeName);

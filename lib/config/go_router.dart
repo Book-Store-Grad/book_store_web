@@ -1,6 +1,7 @@
 import 'package:book_store_web/features/auth/pages/verification_page.dart';
 import 'package:book_store_web/features/author/pages/author_book_page.dart';
 import 'package:book_store_web/features/author/pages/author_books_page.dart';
+import 'package:book_store_web/features/profile/pages/profile_page.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -42,6 +43,10 @@ final router = GoRouter(
     GoRoute(
       path: HomePage.routeName,
       builder: (context, state) => const HomePage(),
+    ),
+    GoRoute(
+      path: ProfilePage.routeName,
+      builder: (context, state) => const ProfilePage(),
     ),
     GoRoute(
       name: BookPage.name,
