@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../styles/app_colors.dart';
 
 class DefaultTextFormField extends StatelessWidget {
+  final bool? enabled;
   final String label;
   final String hint;
   final TextEditingController? controller;
@@ -28,7 +29,7 @@ class DefaultTextFormField extends StatelessWidget {
     this.onSuffixPressed,
     this.suffixIcon,
     this.maxLines =1 ,
-    this.onFieldSubmitted,
+    this.onFieldSubmitted,  this.enabled,
   });
 
   @override
@@ -42,6 +43,7 @@ class DefaultTextFormField extends StatelessWidget {
         ),
         SizedBox(height: 10.h),
         TextFormField(
+          enabled: enabled,
           controller: controller,
           decoration: InputDecoration(
             contentPadding:

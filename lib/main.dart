@@ -37,7 +37,7 @@ class BookStore extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
-      designSize: const Size(1366, 768),
+      designSize: const Size(1366, 768),//854*400
       minTextAdapt: true,
       useInheritedMediaQuery: true,
       builder: (context, child) => MultiBlocProvider(
@@ -61,7 +61,7 @@ class BookStore extends StatelessWidget {
             create: (context) => CartCubit(),
           ),
           BlocProvider(
-            create: (context) => ProfileCubit(),
+            create: (context) => ProfileCubit()..getProfile(),
           ),
         ],
         child: MaterialApp.router(
