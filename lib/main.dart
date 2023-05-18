@@ -28,6 +28,7 @@ void main() async{
   SharedPreferences prefs = await SharedPreferences.getInstance();
   token = prefs.getString('token') ?? '';
   role = prefs.getString('role') ?? '';
+  authorId=prefs.getInt("author_id")??0;
   runApp(const BookStore());
 }
 

@@ -34,7 +34,6 @@ class AuthorRepository {
           headers: {
             'Authorization': 'Bearer $token',
           }
-
       ),
     );
     return response;

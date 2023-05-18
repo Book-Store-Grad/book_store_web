@@ -1,3 +1,6 @@
+
+import 'package:book_store_web/core/constants/app_constants.dart';
+import 'package:book_store_web/features/author/widgets/add_image_dialog.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -17,6 +20,10 @@ class AddBookDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     AuthorCubit cubit = BlocProvider.of<AuthorCubit>(context, listen: false);
+    final TextEditingController nameController=TextEditingController();
+    final TextEditingController priceController=TextEditingController();
+    final TextEditingController genreController=TextEditingController();
+    final TextEditingController descriptionController=TextEditingController();
 
     final List<String> items = [
       'Linguistics',
@@ -48,7 +55,7 @@ class AddBookDialog extends StatelessWidget {
                 DefaultTextFormField(
                   label: 'Name',
                   hint: 'Name',
-                  onChanged: (name) => cubit.bookSchema.name = name,
+                  controller: nameController,
                   validator: (value) {
                     if (value!.isEmpty) {
                       return "Please enter book name";
@@ -82,7 +89,7 @@ class AddBookDialog extends StatelessWidget {
                           )
                           .toList(),
                       onChanged: (category) =>
-                          cubit.bookSchema.category = category!,
+                      genreController.text = category!,
                       decoration: InputDecoration(
                         contentPadding: EdgeInsets.symmetric(
                           vertical: 20.h,
@@ -118,20 +125,22 @@ class AddBookDialog extends StatelessWidget {
                 DefaultTextFormField(
                   label: 'Price',
                   hint: 'Price',
+                  controller: priceController,
                   validator: (value) {
                     if (value!.isEmpty) {
                       return "Please enter book price";
                     }
                     return null;
                   },
-                  onChanged: (price) => cubit.bookSchema.price = price,
+                 // onChanged: (price) => cubit.bookSchema.price = price,
                 ),
                 DefaultTextFormField(
                   label: 'Description',
                   hint: 'Description',
                   maxLines: 4,
-                  onChanged: (description) =>
-                      cubit.bookSchema.description = description,
+                  controller: descriptionController,
+                  // onChanged: (description) =>
+                  //     cubit.bookSchema.description = description,
                   validator: (value) {
                     if (value!.isEmpty) {
                       return "Please enter description";
@@ -142,11 +151,10 @@ class AddBookDialog extends StatelessWidget {
                 BlocConsumer<AuthorCubit, AuthorState>(
                   listener: (context, state) {
                     if (state is AddBookSuccessState) {
-                      Future.delayed(
-                        const Duration(seconds: 1),
-                        () {
-                          context.pop();
-                        },
+                      context.pop();
+                      showDialog(
+                        context: context,
+                        builder: (context) => const AddImage(),
                       );
                     }
                   },
@@ -180,7 +188,7 @@ class AddBookDialog extends StatelessWidget {
                                     onPressed: () {
                                       if (cubit.addBookFormKey.currentState!
                                           .validate()) {
-                                        cubit.addBook();
+                                        cubit.addBookData(autorId: authorId, name: nameController.text, genre: genreController.text, description: descriptionController.text, price: priceController.text);
                                       } else {}
                                     },
                                     color: AppColors.blueButtonColor,
@@ -191,7 +199,7 @@ class AddBookDialog extends StatelessWidget {
                                     minWidth: 135.w,
                                     padding: EdgeInsets.zero,
                                     child: Text(
-                                      'Add',
+                                      'Next',
                                       style: TextStyle(
                                         fontWeight: FontWeight.w500,
                                         color: Colors.white,

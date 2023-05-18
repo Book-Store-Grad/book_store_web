@@ -17,4 +17,6 @@ class ApiConstants {
   ///Profile
   static const String profile = '$baseUrl/customer/profile';
   static const String profileImage = '$baseUrl/customer/image';
+
+
 }

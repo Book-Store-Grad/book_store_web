@@ -48,7 +48,7 @@ class EditBookDialog extends StatelessWidget {
                 DefaultTextFormField(
                   label: 'Name',
                   hint: 'Name',
-                  onChanged: (name) => cubit.bookSchema.name = name,
+               //   onChanged: (name) => cubit.bookSchema.name = name,
                   validator: (value) {
                     if (value!.isEmpty) {
                       return "Please enter book name";
@@ -81,8 +81,8 @@ class EditBookDialog extends StatelessWidget {
                             ),
                           )
                           .toList(),
-                      onChanged: (category) =>
-                          cubit.bookSchema.category = category!,
+                      // onChanged: (category) =>
+                      //     cubit.bookSchema.category = category!,
                       decoration: InputDecoration(
                         contentPadding: EdgeInsets.symmetric(
                           vertical: 20.h,
@@ -124,14 +124,14 @@ class EditBookDialog extends StatelessWidget {
                     }
                     return null;
                   },
-                  onChanged: (price) => cubit.bookSchema.price = price,
+                //  onChanged: (price) => cubit.bookSchema.price = price,
                 ),
                 DefaultTextFormField(
                   label: 'Description',
                   hint: 'Description',
                   maxLines: 4,
-                  onChanged: (description) =>
-                      cubit.bookSchema.description = description,
+                  // onChanged: (description) =>
+                  //     cubit.bookSchema.description = description,
                   validator: (value) {
                     if (value!.isEmpty) {
                       return "Please enter description";

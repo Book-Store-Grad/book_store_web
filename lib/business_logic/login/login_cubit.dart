@@ -37,8 +37,10 @@ class LoginCubit extends Cubit<LoginState> {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       await prefs.setString('token', user!.accessToken!);
       await prefs.setString('role', user!.role!);
+      await prefs.setInt("author_id", user!.id!);
       token = user!.accessToken!;
       role = user!.role!;
+      authorId=user!.id!;
       emit(LoginSuccessState(user!.role!));
     } else if (response.statusCode == 400) {
       emit(LoginFailureState(response.data["detail"]));
