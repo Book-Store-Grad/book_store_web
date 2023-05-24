@@ -61,6 +61,7 @@ class HomeCubit extends Cubit<HomeState> {
   final TextEditingController searchController = TextEditingController();
 
   void onSearchTextChanged() {
+
     emit(SearchState());
   }
 

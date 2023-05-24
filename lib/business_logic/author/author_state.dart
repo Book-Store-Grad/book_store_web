@@ -32,3 +32,9 @@ class DeleteBookFailureState extends AuthorState {}
 class ChooseBookImageState extends AuthorState {}
 
 class ChooseFileState extends AuthorState {}
+
+class GetAuthorBooksLoadingState extends AuthorState {}
+
+class GetAuthorBooksSuccessState extends AuthorState {}
+
+class GetAuthorBooksErrorState extends AuthorState {}

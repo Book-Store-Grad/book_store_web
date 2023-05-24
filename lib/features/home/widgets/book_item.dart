@@ -28,8 +28,8 @@ class BookItem extends StatelessWidget {
           borderRadius: BorderRadius.circular(6).r,
         ),
         child: SizedBox(
-          width: 150.w,
-          height: 210.h,
+          width: 220.w,
+          height: 450.h,
           child: Align(
             alignment: Alignment.center,
             child: Padding(
@@ -41,29 +41,29 @@ class BookItem extends StatelessWidget {
                     children: [
                       Image.asset(
                         AssetImages.cover,
-                        height: 155.h,
-                        width: 115.w,
+                        height: 270.h,
+                        width: 165.w,
                         fit: BoxFit.fill,
                       ),
                       const Spacer(),
                       Align(
-                        alignment: Alignment.centerLeft,
+                        alignment: Alignment.center,
                         child: Text(
                           book.name!,
                           style: TextStyle(
                             fontWeight: FontWeight.w500,
-                            fontSize: 11.sp,
+                            fontSize: 16.sp,
                           ),
                           overflow: TextOverflow.ellipsis,
                         ),
                       ),
                       Align(
-                        alignment: Alignment.centerLeft,
+                        alignment: Alignment.center,
                         child: Text(
                           '${book.price} EGP',
                           style: TextStyle(
                             fontWeight: FontWeight.w500,
-                            fontSize: 11.sp,
+                            fontSize: 16.sp,
                             color: AppColors.primary,
                           ),
                           textAlign: TextAlign.start,

@@ -77,7 +77,7 @@ class _HomeSectionState extends State<HomeSection> {
         ),
         SizedBox(height: 10.h),
         SizedBox(
-          height: 215.h,
+          height: 350.h,
           width: 1300.w,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -87,7 +87,7 @@ class _HomeSectionState extends State<HomeSection> {
                 child: ScrollButton(isLeft: true, onPressed: _scrollLeft),
               ),
               SizedBox(
-                width: 1200.w,
+                width: 900.w,
                 child: ListView.separated(
                   scrollDirection: Axis.horizontal,
                   itemBuilder: (context, index) => widget.books.isEmpty

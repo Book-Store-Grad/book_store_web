@@ -15,7 +15,7 @@ import '../../../styles/app_colors.dart';
 import '../../../shared/widgets/app_bar.dart';
 import 'author_books_page.dart';
 
-class AuthorBookPage extends StatefulWidget {
+class AuthorBookPage extends StatelessWidget {
   final int? id;
 
   const AuthorBookPage({
@@ -26,36 +26,24 @@ class AuthorBookPage extends StatefulWidget {
   static const String name = 'author_book';
   static const String routeName = '/author-book/:id';
 
-  @override
-  State<AuthorBookPage> createState() => _AuthorBookPageState();
-}
-
-class _AuthorBookPageState extends State<AuthorBookPage> {
-  Book? book;
-
-  void getBook() async {
-    await BlocProvider.of<BookCubit>(context, listen: false)
-        .getBook(id: widget.id!);
-  }
-
-  @override
-  void initState() {
-    getBook();
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: appBar(context, isAuthor: false),
+    Book? book;
+    return BlocProvider(
+  create: (context) => BookCubit()..getBook(id: id!),
+  child: Scaffold(
+      appBar: appBar(context, isAuthor: true),
       body: SingleChildScrollView(
         child: BlocConsumer<BookCubit, BookState>(
           listener: (context, state) {
+
             if (state is GetBookSuccessState) {
               book = state.book;
             }
           },
           builder: (context, state) {
+
             return Column(
               children: [
                 Padding(
@@ -333,7 +321,7 @@ class _AuthorBookPageState extends State<AuthorBookPage> {
                                                         : MaterialButton(
                                                             onPressed: () {
                                                               cubit.deleteBook(
-                                                                id: 19,
+                                                                id: book!.id!,
                                                               );
                                                             },
                                                             color: AppColors
@@ -418,6 +406,7 @@ class _AuthorBookPageState extends State<AuthorBookPage> {
           },
         ),
       ),
-    );
+    ),
+);
   }
 }

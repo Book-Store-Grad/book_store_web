@@ -20,9 +20,7 @@ class FavoritesPage extends StatelessWidget {
       FavouriteCubit()
         ..getAllFavItems(),
       child: BlocConsumer<FavouriteCubit, FavouriteState>(
-        listener: (context, state) {
-          // TODO: implement listener
-        },
+        listener: (context, state) {},
         builder: (context, state) {
           var cubit = BlocProvider.of<FavouriteCubit>(context);
           return Scaffold(

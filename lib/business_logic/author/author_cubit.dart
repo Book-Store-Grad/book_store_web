@@ -11,6 +11,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
+import '../../models/book.dart';
+
 part 'author_state.dart';
 
 class AuthorCubit extends Cubit<AuthorState> {
@@ -83,7 +85,7 @@ class AuthorCubit extends Cubit<AuthorState> {
     }
   }
 
- File? image;
+  File? image;
   Uint8List webBookImage = Uint8List(8);
 
   chooseBookImage() async {
@@ -91,7 +93,7 @@ class AuthorCubit extends Cubit<AuthorState> {
         await ImagePicker().pickImage(source: ImageSource.gallery);
     if (_pickedFile != null) {
       webBookImage = await _pickedFile.readAsBytes();
-     image = File(_pickedFile.path);
+      image = File(_pickedFile.path);
     }
     emit(ChooseBookImageState());
   }
@@ -106,7 +108,7 @@ class AuthorCubit extends Cubit<AuthorState> {
           "book_id": 9,
           "image": await MultipartFile.fromBytes(
             webBookImage,
-             filename: image!.path.split('/').last,
+            filename: image!.path.split('/').last,
           ),
         }).then((value) {
       print("This is status code:${value.statusCode}");
@@ -121,9 +123,8 @@ class AuthorCubit extends Cubit<AuthorState> {
     });
   }
 
-
-
   Uint8List webBookFile = Uint8List(8);
+
   chooseFile() async {
     FilePickerResult? result = await FilePicker.platform.pickFiles(
       type: FileType.custom,
@@ -132,17 +133,16 @@ class AuthorCubit extends Cubit<AuthorState> {
     try {
       if (result != null) {
         webBookFile = await result.files.first.bytes!;
-      }
-      else {
+      } else {
         print("error in file picker function !");
       }
       emit(ChooseFileState());
-    }catch(e){
+    } catch (e) {
       print("This is e: $e");
     }
   }
 
- Future <void> addBookFile({required int bookId}) async {
+  Future<void> addBookFile({required int bookId}) async {
     emit(AddBookFileLoadingState());
     DioHelper.postData(
         containImage: true,
@@ -152,22 +152,42 @@ class AuthorCubit extends Cubit<AuthorState> {
           "book_id": 2,
           "file": await MultipartFile.fromBytes(
             webBookFile,
-           // filename: filepath!.split('/').last,
+            // filename: filepath!.split('/').last,
           ),
         }).then((value) {
       if (value.statusCode == 200) {
         print(
             "This is status code:  ${value.statusCode}/This is data:${value.data}");
         print("File Updated Successfully !");
-
       } else {
         print(
             "This is status code:  ${value.statusCode}/This is data:${value.data}");
       }
-    //  print("File Path: $fileBytes");
+      //  print("File Path: $fileBytes");
       emit(AddBookFileSuccessState());
     }).catchError((e) {
       emit(AddBookFileErrorState());
     });
+  }
+
+  List<Book> authorBooks = [];
+
+  Future<void> getAuthorBooks() async {
+    emit(GetAuthorBooksLoadingState());
+    Response response = await authorRepository.getAuthorBooks();
+    try {
+      if (response.statusCode == 200) {
+        print("Get Author Books Success !");
+        authorBooks.clear();
+        response.data["content"]["books"].forEach((book) => authorBooks.add(Book.fromJson(book)));
+        print(authorBooks.length);
+        emit(GetAuthorBooksSuccessState());
+      } else {
+        print("not dooooone");
+      }
+    } catch (e) {
+      emit(GetAuthorBooksErrorState());
+      print(e.toString());
+    }
   }
 }

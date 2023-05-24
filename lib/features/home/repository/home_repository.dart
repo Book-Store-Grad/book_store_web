@@ -26,4 +26,17 @@ class HomeRepository {
     );
     return response;
   }
+
+  Future<Response> searchBook({
+    required String query,
+  }) async {
+    Response response = await Dio().get(
+      '${ApiConstants.book}/',
+      options: Options(
+        contentType: Headers.jsonContentType,
+        validateStatus: (_) => true,
+      ),
+    );
+    return response;
+  }
 }

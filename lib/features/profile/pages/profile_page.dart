@@ -20,7 +20,7 @@ class ProfilePage extends StatelessWidget {
       builder: (context, state) {
         var cubit = ProfileCubit.get(context);
         return Scaffold(
-          appBar: appBar(context, isAuthor: false),
+          appBar: appBar(context, isAuthor: role!= 'customer'),
           body: SingleChildScrollView(
             child: ListView(
                 padding: const EdgeInsets.all(15),
