@@ -28,7 +28,6 @@ class HomePage extends StatelessWidget {
               children: [
                 SearchSection(
                   searchController: cubit.searchController,
-                  onChanged: (_) => cubit.onSearchTextChanged(),
                 ),
                 Image.asset(
                   AssetImages.homeCover,

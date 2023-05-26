@@ -5,17 +5,21 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../core/utils/asset_imgaes.dart';
+import '../../../models/book.dart';
 import '../../../styles/app_colors.dart';
 
 class SearchItem extends StatelessWidget {
+  final Book book;
+
   const SearchItem({
     super.key,
+    required this.book,
   });
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => context.go(BookPage.routeName),
+      onTap: () => context.goNamed(BookPage.name, params: {'id': book.id.toString()}),
       child: Card(
         elevation: 4,
         shape: RoundedRectangleBorder(
@@ -26,73 +30,39 @@ class SearchItem extends StatelessWidget {
           child: Padding(
             padding:
             const EdgeInsets.all(15).r,
-            child: Stack(
-              alignment: AlignmentDirectional.topEnd,
-              fit: StackFit.passthrough,
+            child: Column(
               children: [
-                Column(
-                  children: [
-                    Image.asset(
-                      AssetImages.cover,
-                      height: 305.h,
-                      width: double.infinity,
-                      fit: BoxFit.fill,
-                    ),
-                    SizedBox(height: 20.h),
-                    Align(
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        'My Book Cover',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 15.sp,
-                        ),
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                    ),
-                    SizedBox(height: 8.h),
-                    Align(
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        '300 EGP',
-                        style: TextStyle(
-                          fontWeight: FontWeight.w500,
-                          fontSize: 14.5.sp,
-                          color: AppColors.primary,
-                        ),
-                        textAlign: TextAlign.start,
-                      ),
-                    ),
-                  ],
+                Image.asset(
+                  AssetImages.cover,
+                  height: 275.h,
+                  width: double.infinity,
+                  fit: BoxFit.fill,
                 ),
-                Padding(
-                  padding:  EdgeInsets.only(right: 10.w, top: 10.h),
-                  child: InkWell(
-                    onTap: () {},
-                    child: Container(
-                      decoration:  BoxDecoration(
-                        shape: BoxShape.circle,
-                        boxShadow: [
-                          BoxShadow(
-                            color: const Color.fromRGBO(0, 0, 0, 0.25),
-                            spreadRadius: 6.r,
-                            blurRadius: 12.r,
-                            offset: Offset(0.w, 4.h),
-                          ),
-                        ],
-                      ),
-                      child: CircleAvatar(
-                        backgroundColor: Colors.white,
-                        radius: 21.r,
-                        child: Icon(
-                          CupertinoIcons.heart_fill,
-                          color: Colors.red,
-                          size: 20.r,
-                        ),
-                      ),
+                SizedBox(height: 20.h),
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    book.name!,
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 15.sp,
                     ),
+                    overflow: TextOverflow.ellipsis,
                   ),
-                )
+                ),
+                SizedBox(height: 8.h),
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    '${book.price} EGP',
+                    style: TextStyle(
+                      fontWeight: FontWeight.w500,
+                      fontSize: 14.5.sp,
+                      color: AppColors.primary,
+                    ),
+                    textAlign: TextAlign.start,
+                  ),
+                ),
               ],
             ),
           ),

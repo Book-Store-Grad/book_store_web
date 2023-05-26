@@ -1,5 +1,4 @@
 import 'package:book_store_web/business_logic/login/login_cubit.dart';
-import 'package:book_store_web/core/constants/app_constants.dart';
 import 'package:book_store_web/features/auth/pages/login_page.dart';
 import 'package:book_store_web/features/profile/pages/profile_page.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
@@ -9,10 +8,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../core/utils/asset_imgaes.dart';
-import 'nav_bar.dart';
-import '../../styles/app_colors.dart';
 import '../../features/cart/pages/cart_page.dart';
 import '../../features/favorites/pages/favorites_page.dart';
+import '../../styles/app_colors.dart';
+import 'nav_bar.dart';
 
 PreferredSizeWidget appBar(BuildContext context, {required bool isAuthor}) =>
     AppBar(
@@ -51,9 +50,10 @@ PreferredSizeWidget appBar(BuildContext context, {required bool isAuthor}) =>
                       ),
                     ],
                   ),
+                  hoverColor: Colors.transparent,
                 ),
                 const Spacer(),
-                if (isAuthor == null || !isAuthor) const NavBar(),
+                if (!isAuthor) const NavBar(),
                 const Spacer(),
                 Row(
                   children: [

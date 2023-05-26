@@ -20,7 +20,7 @@ class ProfilePage extends StatelessWidget {
       builder: (context, state) {
         var cubit = ProfileCubit.get(context);
         return Scaffold(
-          appBar: appBar(context, isAuthor: role!= 'customer'),
+          appBar: appBar(context, isAuthor: role != 'customer'),
           body: SingleChildScrollView(
             child: ListView(
                 padding: const EdgeInsets.all(15),
@@ -40,99 +40,105 @@ class ProfilePage extends StatelessWidget {
                         ),
                       ),
                       state is GetProfileImageLoadingState
-                          ? const Center(child: CircularProgressIndicator())
+                          ? const Center(
+                              child: CircularProgressIndicator(),
+                            )
                           : Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          InkWell(
-                            onTap: () async {
-                              await cubit.chooseImage();
-                            },
-                            child: Card(
-                              shape: const CircleBorder(),
-                              elevation: 10,
-                              shadowColor: Colors.blue,
-                              child: Container(
-                                width: 230.w,
-                                height: 230.h,
-                                decoration: const BoxDecoration(
-                                  shape: BoxShape.circle,
-                                ),
-                                child: cubit.image != null
-                                    ? Card(
-                                  clipBehavior: Clip.antiAlias,
-                                  shape: const CircleBorder(),
-                                  elevation: 10,
-                                  child: Image.memory(
-                                    cubit.webImage,
-                                    fit: BoxFit.contain,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                InkWell(
+                                  onTap: () async {
+                                    await cubit.chooseImage();
+                                  },
+                                  splashColor: Colors.transparent,
+                                  borderRadius: BorderRadius.circular(1000),
+                                  child: Card(
+                                    shape: const CircleBorder(),
+                                    elevation: 10,
+                                    shadowColor: Colors.blue,
+                                    child: Container(
+                                      width: 230.w,
+                                      height: 230.h,
+                                      decoration: const BoxDecoration(
+                                        shape: BoxShape.circle,
+                                      ),
+                                      child: cubit.image != null
+                                          ? Card(
+                                              clipBehavior: Clip.antiAlias,
+                                              shape: const CircleBorder(),
+                                              elevation: 10,
+                                              child: Image.memory(
+                                                cubit.webImage,
+                                                fit: BoxFit.contain,
+                                              ),
+                                            )
+                                          : Card(
+                                              shape: const CircleBorder(),
+                                              clipBehavior: Clip.antiAlias,
+                                              child: Image.network(
+                                                ApiConstants.profileImage,
+                                                fit: BoxFit.contain,
+                                                headers: {
+                                                  "Authorization":
+                                                      "Bearer $token",
+                                                },
+                                              ),
+                                            ),
+                                    ),
                                   ),
-                                )
-                                    : Card(
-                                  shape: const CircleBorder(),
-                                  clipBehavior: Clip.antiAlias,
-                                  child: Image.network(
-                                      ApiConstants.profileImage,
-                                      fit: BoxFit.contain,
-                                      headers: {
-                                        "Authorization":
-                                        "Bearer $token",
-                                      }),
                                 ),
-                              ),
+                                state is UpdateProfileImageLoadingState
+                                    ? const CircularProgressIndicator()
+                                    : cubit.image == null
+                                        ? const SizedBox()
+                                        : TextButton(
+                                            onPressed: () {
+                                              cubit.updateProfileImage();
+                                            },
+                                            child: const Text("Upload"),
+                                          ),
+                                const SizedBox(width: 50),
+                                Column(
+                                  children: [
+                                    DefaultTextFormField(
+                                      enabled: false,
+                                      label: 'Email',
+                                      hint: '',
+                                      controller: cubit.emailController,
+                                    ),
+                                    SizedBox(height: 25.h),
+                                    DefaultTextFormField(
+                                      label: 'Name',
+                                      hint: '',
+                                      controller: cubit.nameController,
+                                      //onChanged: (email) => cubit.loginSchema.email = email,
+                                    ),
+                                    SizedBox(height: 25.h),
+                                    DefaultTextFormField(
+                                      enabled: false,
+                                      label: 'Gender',
+                                      hint: '',
+                                      controller: cubit.genderController,
+                                      //onChanged: (email) => cubit.loginSchema.email = email,
+                                    ),
+                                  ],
+                                )
+                              ],
                             ),
-                          ),
-                          state is UpdateProfileImageLoadingState
-                              ? const CircularProgressIndicator()
-                              : cubit.image == null
-                              ? const SizedBox()
-                              : TextButton(
-                              onPressed: () {
-                                cubit.updateProfileImage();
-                              },
-                              child: const Text("Upload")),
-                          SizedBox(width: 50),
-                          Column(
-                            children: [
-                              DefaultTextFormField(
-                                enabled: false,
-                                label: 'Email',
-                                hint: '',
-                                controller: cubit.emailController,
-                              ),
-                              SizedBox(height: 25.h),
-                              DefaultTextFormField(
-                                label: 'Name',
-                                hint: '',
-                                controller: cubit.nameController,
-                                //onChanged: (email) => cubit.loginSchema.email = email,
-                              ),
-                              SizedBox(height: 25.h),
-                              DefaultTextFormField(
-                                enabled: false,
-                                label: 'Gender',
-                                hint: '',
-                                controller: cubit.genderController,
-
-                                //onChanged: (email) => cubit.loginSchema.email = email,
-                              ),
-                            ],
-                          )
-                        ],
-                      ),
                       SizedBox(height: 20.h),
                       state is UpdateProfileLoadingState
                           ? const CircularProgressIndicator()
                           : DefaultButton(
-                        onPressed: () {
-
-                          cubit.updateProfile(name: cubit.nameController.text);
-                          print("save pressed");
-                        },
-                        text: "Save",
-                        height: 56.h,
-                        width: 300.w,
-                      )
+                              onPressed: () {
+                                cubit.updateProfile(
+                                  name: cubit.nameController.text,
+                                );
+                                print("save pressed");
+                              },
+                              text: "Save",
+                              height: 56.h,
+                              width: 300.w,
+                            )
                     ],
                   )
                 ]),

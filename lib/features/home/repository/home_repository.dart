@@ -30,13 +30,12 @@ class HomeRepository {
   Future<Response> searchBook({
     required String query,
   }) async {
-    Response response = await Dio().get(
-      '${ApiConstants.book}/',
+    return await Dio().get(
+      '${ApiConstants.getAllBooks}?query=$query',
       options: Options(
         contentType: Headers.jsonContentType,
         validateStatus: (_) => true,
       ),
     );
-    return response;
   }
 }

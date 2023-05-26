@@ -3,7 +3,6 @@ import 'package:book_store_web/models/book.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:meta/meta.dart';
 
 part 'home_state.dart';
 
@@ -59,9 +58,26 @@ class HomeCubit extends Cubit<HomeState> {
   }
 
   final TextEditingController searchController = TextEditingController();
+  List<Book> searchedBooks = [];
+
+  void searchBook() async {
+    searchedBooks.clear();
+    searchController.addListener(() {
+      emit(SearchState());
+    });
+    emit(SearchLoading());
+    Response response =
+        await homeRepository.searchBook(query: searchController.text);
+    if (response.data['content']['books'].isEmpty) {
+      return emit(SearchEmptyState());
+    }
+    response.data['content']['books'].forEach(
+      (e) => searchedBooks.add(Book.fromJson(e)),
+    );
+    emit(SearchSuccess(searchedBooks: searchedBooks));
+  }
 
   void onSearchTextChanged() {
-
     emit(SearchState());
   }
 

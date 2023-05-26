@@ -42,7 +42,7 @@ class BookItem extends StatelessWidget {
                       Image.asset(
                         AssetImages.cover,
                         height: 270.h,
-                        width: 165.w,
+                        width: 190.w,
                         fit: BoxFit.fill,
                       ),
                       const Spacer(),

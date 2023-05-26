@@ -78,13 +78,16 @@ class _HomeSectionState extends State<HomeSection> {
         SizedBox(height: 10.h),
         SizedBox(
           height: 350.h,
-          width: 1300.w,
+          width: 1500.w,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               SizedBox(
                 width: 50.w,
                 child: ScrollButton(isLeft: true, onPressed: _scrollLeft),
+              ),
+              SizedBox(
+                width: 15.w,
               ),
               SizedBox(
                 width: 900.w,
@@ -99,6 +102,9 @@ class _HomeSectionState extends State<HomeSection> {
                   itemCount: widget.books.isEmpty ? 8 : widget.books.length,
                   controller: _scrollController,
                 ),
+              ),
+              SizedBox(
+                width: 15.w,
               ),
               SizedBox(
                 width: 50.w,
