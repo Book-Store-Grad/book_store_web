@@ -1,15 +1,15 @@
-import 'package:book_store_web/business_logic/login/login_cubit.dart';
-import 'package:book_store_web/features/auth/pages/login_page.dart';
-import 'package:book_store_web/features/profile/pages/profile_page.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../business_logic/login/login_cubit.dart';
 import '../../core/utils/asset_imgaes.dart';
+import '../../features/auth/pages/login_page.dart';
 import '../../features/cart/pages/cart_page.dart';
 import '../../features/favorites/pages/favorites_page.dart';
+import '../../features/profile/pages/profile_page.dart';
 import '../../styles/app_colors.dart';
 import 'nav_bar.dart';
 
@@ -32,12 +32,15 @@ PreferredSizeWidget appBar(BuildContext context, {required bool isAuthor}) =>
               children: [
                 InkWell(
                   onTap: () => context.go('/'),
+                  hoverColor: Colors.transparent,
+                  splashColor: Colors.transparent,
+                  highlightColor: Colors.transparent,
                   child: Row(
                     children: [
                       Image.asset(
                         AssetImages.logo,
-                        height: 30.h,
-                        width: 30.h,
+                        height: 32.5.h,
+                        width: 32.5.w,
                       ),
                       SizedBox(width: 15.w),
                       Text(
@@ -50,7 +53,6 @@ PreferredSizeWidget appBar(BuildContext context, {required bool isAuthor}) =>
                       ),
                     ],
                   ),
-                  hoverColor: Colors.transparent,
                 ),
                 const Spacer(),
                 if (!isAuthor) const NavBar(),

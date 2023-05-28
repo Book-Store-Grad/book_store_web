@@ -1,3 +1,4 @@
+import 'package:book_store_web/models/book.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -8,15 +9,18 @@ import 'package:go_router/go_router.dart';
 import '../../../business_logic/author/author_cubit.dart';
 import '../../../shared/widgets/default_text_form_field.dart';
 import '../../../styles/app_colors.dart';
+import 'add_image_dialog.dart';
 
 class EditBookDialog extends StatelessWidget {
+  final Book book;
+
   const EditBookDialog({
-    super.key,
+    super.key, required this.book,
   });
 
   @override
   Widget build(BuildContext context) {
-    AuthorCubit cubit = BlocProvider.of<AuthorCubit>(context, listen: false);
+    AuthorCubit cubit = BlocProvider.of<AuthorCubit>(context);
 
     final List<String> items = [
       'Linguistics',
@@ -37,7 +41,7 @@ class EditBookDialog extends StatelessWidget {
         height: 590.h,
         width: 500.w,
         child: Form(
-          key: cubit.addBookFormKey,
+          key: cubit.editBookFormKey,
           child: Transform.translate(
             offset: Offset(20.w, 0.h),
             child: Column(
@@ -48,7 +52,8 @@ class EditBookDialog extends StatelessWidget {
                 DefaultTextFormField(
                   label: 'Name',
                   hint: 'Name',
-               //   onChanged: (name) => cubit.bookSchema.name = name,
+                  controller: cubit.editBookNameController,
+                  // initialValue: book.name,
                   validator: (value) {
                     if (value!.isEmpty) {
                       return "Please enter book name";
@@ -81,8 +86,8 @@ class EditBookDialog extends StatelessWidget {
                             ),
                           )
                           .toList(),
-                      // onChanged: (category) =>
-                      //     cubit.bookSchema.category = category!,
+                      onChanged: (category) =>
+                          cubit.editBookCategoryController.text = category!,
                       decoration: InputDecoration(
                         contentPadding: EdgeInsets.symmetric(
                           vertical: 20.h,
@@ -118,18 +123,21 @@ class EditBookDialog extends StatelessWidget {
                 DefaultTextFormField(
                   label: 'Price',
                   hint: 'Price',
+                  controller: cubit.editBookPriceController,
+                  // initialValue: book.price.toString(),
                   validator: (value) {
                     if (value!.isEmpty) {
                       return "Please enter book price";
                     }
                     return null;
                   },
-                //  onChanged: (price) => cubit.bookSchema.price = price,
+                  // onChanged: (price) => cubit.bookSchema.price = price,
                 ),
                 DefaultTextFormField(
                   label: 'Description',
                   hint: 'Description',
                   maxLines: 4,
+                  controller: cubit.editBookDescriptionController,
                   // onChanged: (description) =>
                   //     cubit.bookSchema.description = description,
                   validator: (value) {
@@ -141,12 +149,11 @@ class EditBookDialog extends StatelessWidget {
                 ),
                 BlocConsumer<AuthorCubit, AuthorState>(
                   listener: (context, state) {
-                    if (state is AddBookSuccessState) {
-                      Future.delayed(
-                        const Duration(seconds: 1),
-                        () {
-                          context.pop();
-                        },
+                    if (state is EditBookSuccess) {
+                      context.pop();
+                      showDialog(
+                        context: context,
+                        builder: (context) => const AddImage(),
                       );
                     }
                   },
@@ -168,7 +175,7 @@ class EditBookDialog extends StatelessWidget {
                                       ),
                                       SizedBox(width: 8.w),
                                       Text(
-                                        'Successfully edited',
+                                        'Successfully added',
                                         style: TextStyle(
                                           fontWeight: FontWeight.w500,
                                           fontSize: 15.sp,
@@ -178,12 +185,12 @@ class EditBookDialog extends StatelessWidget {
                                   )
                                 : MaterialButton(
                                     onPressed: () {
-                                      if (cubit.addBookFormKey.currentState!
+                                      if (cubit.editBookFormKey.currentState!
                                           .validate()) {
-                                        // Todo: add implementation for editing book
+                                        cubit.editBook(bookId: book.id!);
                                       } else {}
                                     },
-                                    color: AppColors.green,
+                                    color: AppColors.blueButtonColor,
                                     shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(10.r),
                                     ),
@@ -191,7 +198,7 @@ class EditBookDialog extends StatelessWidget {
                                     minWidth: 135.w,
                                     padding: EdgeInsets.zero,
                                     child: Text(
-                                      'Confirm',
+                                      'Edit',
                                       style: TextStyle(
                                         fontWeight: FontWeight.w500,
                                         color: Colors.white,

@@ -16,6 +16,7 @@ class DefaultTextFormField extends StatelessWidget {
   final VoidCallback? onSuffixPressed;
   final int? maxLines;
   final ValueChanged<String>? onFieldSubmitted;
+  final String? initialValue;
 
   const DefaultTextFormField({
     super.key,
@@ -28,8 +29,10 @@ class DefaultTextFormField extends StatelessWidget {
     this.isHidden = false,
     this.onSuffixPressed,
     this.suffixIcon,
-    this.maxLines =1 ,
-    this.onFieldSubmitted,  this.enabled,
+    this.maxLines = 1,
+    this.onFieldSubmitted,
+    this.enabled,
+    this.initialValue,
   });
 
   @override

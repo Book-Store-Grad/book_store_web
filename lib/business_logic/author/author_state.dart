@@ -38,3 +38,9 @@ class GetAuthorBooksLoadingState extends AuthorState {}
 class GetAuthorBooksSuccessState extends AuthorState {}
 
 class GetAuthorBooksErrorState extends AuthorState {}
+
+class EditBookLoading extends AuthorState {}
+
+class EditBookSuccess extends AuthorState {}
+
+class EditBookFailure extends AuthorState {}

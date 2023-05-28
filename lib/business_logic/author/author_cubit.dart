@@ -179,7 +179,8 @@ class AuthorCubit extends Cubit<AuthorState> {
       if (response.statusCode == 200) {
         print("Get Author Books Success !");
         authorBooks.clear();
-        response.data["content"]["books"].forEach((book) => authorBooks.add(Book.fromJson(book)));
+        response.data["content"]["books"]
+            .forEach((book) => authorBooks.add(Book.fromJson(book)));
         print(authorBooks.length);
         emit(GetAuthorBooksSuccessState());
       } else {
@@ -188,6 +189,42 @@ class AuthorCubit extends Cubit<AuthorState> {
     } catch (e) {
       emit(GetAuthorBooksErrorState());
       print(e.toString());
+    }
+  }
+
+  // Edit Book
+
+  final editBookFormKey = GlobalKey<FormState>();
+
+  TextEditingController editBookNameController = TextEditingController();
+  TextEditingController editBookDescriptionController = TextEditingController();
+  TextEditingController editBookCategoryController = TextEditingController();
+  TextEditingController editBookPriceController = TextEditingController();
+
+  void editBook({required int bookId}) async {
+    emit(EditBookLoading());
+    try {
+      Response response = await authorRepository.editBook(
+        bookId: bookId,
+        bookName: editBookNameController.text,
+        description: editBookDescriptionController.text,
+        category: editBookCategoryController.text,
+        price: int.parse(editBookPriceController.text),
+      );
+      if (response.statusCode == 200) {
+        editBookNameController.clear();
+        editBookDescriptionController.clear();
+        editBookCategoryController.clear();
+        editBookPriceController.clear();
+
+        emit(EditBookSuccess());
+      } else {
+        print(response.data);
+        emit(EditBookFailure());
+      }
+    } catch (e) {
+      print(e.toString());
+      emit(EditBookFailure());
     }
   }
 }

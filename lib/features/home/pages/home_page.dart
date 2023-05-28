@@ -1,9 +1,9 @@
-import 'package:book_store_web/core/utils/asset_imgaes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../business_logic/home/home_cubit.dart';
+import '../../../core/utils/asset_imgaes.dart';
 import '../../../shared/widgets/app_bar.dart';
 import '../../../shared/widgets/footer.dart';
 import '../widgets/home_section.dart';

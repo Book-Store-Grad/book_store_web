@@ -23,7 +23,6 @@ class AuthorRepository {
   }) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String? token = prefs.getString('token');
-    print("This is token: $token******* This is Id:$id");
     Response response = await Dio().delete(
       '${ApiConstants.book}/$id',
       options: Options(validateStatus: (_) => true, headers: {
@@ -34,7 +33,39 @@ class AuthorRepository {
   }
 
   Future<Response> getAuthorBooks() async {
-    print(authorId);
-    return await Dio().get('${ApiConstants.getAllBooks}?customer_id=$authorId');
+    return await Dio().get(
+      '${ApiConstants.getAllBooks}?customer_id=$authorId',
+      options: Options(
+        validateStatus: (_) => true,
+        headers: {
+          'Authorization': 'Bearer $token',
+        },
+      ),
+    );
+  }
+
+  Future<Response> editBook({
+    required int bookId,
+    required String bookName,
+    required String description,
+    required String category,
+    required int price,
+  }) async {
+    return await Dio().put(
+      '${ApiConstants.book}/$bookId',
+      data: {
+        "name": bookName,
+        "description": description,
+        "genre": category,
+        "price": price,
+        "author_id": authorId
+      },
+      options: Options(
+        validateStatus: (_) => true,
+        headers: {
+          'Authorization': 'Bearer $token',
+        },
+      ),
+    );
   }
 }

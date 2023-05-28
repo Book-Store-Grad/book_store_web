@@ -1,4 +1,5 @@
-  import 'package:flutter/cupertino.dart';
+  import 'package:book_store_web/features/author/widgets/edit_book_dialog.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -37,13 +38,11 @@ class AuthorBookPage extends StatelessWidget {
       body: SingleChildScrollView(
         child: BlocConsumer<BookCubit, BookState>(
           listener: (context, state) {
-
             if (state is GetBookSuccessState) {
               book = state.book;
             }
           },
           builder: (context, state) {
-
             return Column(
               children: [
                 Padding(
@@ -375,7 +374,15 @@ class AuthorBookPage extends StatelessWidget {
                                 ),
                                 const Spacer(),
                                 MaterialButton(
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    showDialog(context: context, builder: (context) {
+                                      AuthorCubit cubit = BlocProvider.of<AuthorCubit>(context);
+                                      cubit.editBookNameController.text = book!.name!;
+                                      cubit.editBookDescriptionController.text = book!.description!;
+                                      cubit.editBookPriceController.text = book!.price!.toString();
+                                      return EditBookDialog(book: book!);
+                                    },);
+                                  },
                                   color: AppColors.green,
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(10.r),

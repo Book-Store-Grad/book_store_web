@@ -19,8 +19,7 @@ class AuthorBooksPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => AuthorCubit()..getAuthorBooks(),
-      child: BlocConsumer<AuthorCubit, AuthorState>(
-        listener: (context, state) {},
+      child: BlocBuilder<AuthorCubit, AuthorState>(
         builder: (context, state) {
           AuthorCubit cubit = BlocProvider.of<AuthorCubit>(context);
           return Scaffold(
@@ -77,12 +76,18 @@ class AuthorBooksPage extends StatelessWidget {
                             children: [
                               SizedBox(height: 45.h),
                               ListView.separated(
-                                itemBuilder: (context, index) => cubit.authorBooks.isEmpty ?  FavSkeleton() : AuthorBook(
-                                  bookId: cubit.authorBooks[index].id!,
-                                  bookName: cubit.authorBooks[index].name!,
-                                  bookDescription: cubit.authorBooks[index].description!,
-                                  bookImageUrl: cubit.authorBooks[index].bookImage!,
-                                ),
+                                itemBuilder: (context, index) => cubit
+                                        .authorBooks.isEmpty
+                                    ? const FavSkeleton()
+                                    : AuthorBook(
+                                        bookId: cubit.authorBooks[index].id!,
+                                        bookName:
+                                            cubit.authorBooks[index].name!,
+                                        bookDescription: cubit
+                                            .authorBooks[index].description!,
+                                        bookImageUrl:
+                                            cubit.authorBooks[index].bookImage!,
+                                      ),
                                 separatorBuilder: (context, index) =>
                                     SizedBox(height: 30.h),
                                 itemCount: cubit.authorBooks.length,
