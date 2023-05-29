@@ -1,4 +1,5 @@
 import 'package:book_store_web/business_logic/favourite/favourite_cubit.dart';
+import 'package:book_store_web/styles/app_colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -87,6 +88,17 @@ class _BookPageState extends State<BookPage> {
                                       fontSize: 35.sp,
                                     ),
                                   ),
+                            SizedBox(height: 5.h),
+                            book == null
+                                ? DefaultSkeleton(height: 30.h, width: 400.w)
+                                : Text(
+                                    '${book!.category}',
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: 18.sp,
+                                      color: Colors.black.withOpacity(.65),
+                                    ),
+                                  ),
                             SizedBox(height: 25.h),
                             Container(
                               height: 200.h,
@@ -105,9 +117,9 @@ class _BookPageState extends State<BookPage> {
                                     Text(
                                       'About Book',
                                       style: TextStyle(
-                                        fontSize: 17.sp,
-                                        fontWeight: FontWeight.bold,
-                                      ),
+                                          fontSize: 19.sp,
+                                          fontWeight: FontWeight.bold,
+                                          decoration: TextDecoration.underline),
                                     ),
                                     SizedBox(height: 10.h),
                                     book == null
@@ -156,216 +168,154 @@ class _BookPageState extends State<BookPage> {
                               ),
                             ),
                             SizedBox(height: 35.h),
-                            Table(
-                              border: TableBorder(
-                                bottom: BorderSide(
-                                  color: Colors.black,
-                                  width: 0.5.w,
-                                ),
-                                top: BorderSide(
-                                  color: Colors.black,
-                                  width: 0.5.w,
-                                ),
-                                horizontalInside: BorderSide(
-                                  color: Colors.black,
-                                  width: 0.5.w,
-                                ),
-                                verticalInside: BorderSide(
-                                  color: Colors.black,
-                                  width: 0.5.w,
-                                ),
-                              ),
-                              children: [
-                                TableRow(
-                                  children: [
-                                    TableCell(
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(6).r,
-                                        child: Text(
-                                          '    Author',
-                                          style: TextStyle(
-                                              fontSize: 17.sp,
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                      ),
-                                    ),
-                                    TableCell(
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(6).r,
-                                        child: Text(
-                                          '       Hazem Osama',
-                                          style: TextStyle(fontSize: 17.sp),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                TableRow(
-                                  children: [
-                                    TableCell(
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(6).r,
-                                        child: Text(
-                                          '    ISBN',
-                                          style: TextStyle(
-                                              fontSize: 17.sp,
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                      ),
-                                    ),
-                                    TableCell(
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(6).r,
-                                        child: Text(
-                                          '       978-123456789',
-                                          style: TextStyle(fontSize: 17.sp),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                TableRow(
-                                  children: [
-                                    TableCell(
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(6).r,
-                                        child: Text(
-                                          '    Category',
-                                          style: TextStyle(
-                                              fontSize: 17.sp,
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                      ),
-                                    ),
-                                    TableCell(
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(6).r,
-                                        child: book == null
-                                            ? Align(
-                                                alignment: Alignment.center,
-                                                child: DefaultSkeleton(
-                                                  height: 30.h,
-                                                  width: 175.w,
-                                                ),
-                                              )
-                                            : Text(
-                                                '       ${book!.category}',
-                                                style: TextStyle(
-                                                  fontSize: 17.sp,
-                                                ),
-                                              ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                            SizedBox(height: 32.5.h),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              children: [
-                                BlocProvider(
-                                  create: (context) => FavouriteCubit(),
-                                  child: BlocConsumer<FavouriteCubit,
-                                      FavouriteState>(
-                                    listener: (context, state) {},
-                                    builder: (context, state) {
-                                      return InkWell(
-                                        onTap: () {
-                                          BlocProvider.of<FavouriteCubit>(
-                                                  context)
-                                              .addToFavourite(
-                                                  bookId: book!.id!);
-                                        },
-                                        child: state is AddToFavouriteLoading
-                                            ? SizedBox(
-                                                height: 20.h,
-                                                width: 20.w,
-                                                child:
-                                                    const CircularProgressIndicator(
-                                                  color: Colors.red,
-                                                ),
-                                              )
-                                            : Container(
-                                                decoration: BoxDecoration(
-                                                  shape: BoxShape.circle,
-                                                  boxShadow: [
-                                                    BoxShadow(
-                                                      color:
-                                                          const Color.fromRGBO(
-                                                              0, 0, 0, 0.25),
-                                                      spreadRadius: 2,
-                                                      blurRadius: 4,
-                                                      offset: Offset(0.w, 2.h),
+                            book == null
+                                ? DefaultSkeleton(height: 50.h, width: 450.w)
+                                : Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceAround,
+                                    children: [
+                                      BlocProvider(
+                                        create: (context) => FavouriteCubit(),
+                                        child: BlocConsumer<FavouriteCubit,
+                                            FavouriteState>(
+                                          listener: (context, state) {},
+                                          builder: (context, state) {
+                                            return InkWell(
+                                              onTap: () {
+                                                BlocProvider.of<FavouriteCubit>(
+                                                        context)
+                                                    .addToFavourite(
+                                                  bookId: book!.id!,
+                                                );
+                                              },
+                                              child: state
+                                                      is AddToFavouriteLoading
+                                                  ? SizedBox(
+                                                      height: 20.h,
+                                                      width: 20.w,
+                                                      child:
+                                                          const CircularProgressIndicator(
+                                                        color: Colors.red,
+                                                      ),
+                                                    )
+                                                  : Container(
+                                                      decoration: BoxDecoration(
+                                                        shape: BoxShape.circle,
+                                                        boxShadow: [
+                                                          BoxShadow(
+                                                            color: const Color
+                                                                    .fromRGBO(
+                                                                0, 0, 0, 0.25),
+                                                            spreadRadius: 2,
+                                                            blurRadius: 4,
+                                                            offset: Offset(
+                                                              0.w,
+                                                              2.h,
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                      child: CircleAvatar(
+                                                        backgroundColor:
+                                                            Colors.white,
+                                                        radius: 28.r,
+                                                        child: Icon(
+                                                          CupertinoIcons
+                                                              .suit_heart,
+                                                          color: Colors.red,
+                                                          size: 24.r,
+                                                        ),
+                                                      ),
                                                     ),
-                                                  ],
-                                                ),
-                                                child: CircleAvatar(
-                                                  backgroundColor: Colors.white,
-                                                  radius: 28.r,
-                                                  child: Icon(
-                                                    CupertinoIcons.suit_heart,
-                                                    color: Colors.red,
-                                                    size: 24.r,
-                                                  ),
-                                                ),
-                                              ),
-                                      );
-                                    },
-                                  ),
-                                ),
-                                book == null
-                                    ? DefaultSkeleton(
-                                        height: 20.h,
-                                        width: 200.w,
-                                      )
-                                    : Text(
+                                            );
+                                          },
+                                        ),
+                                      ),
+                                      Text(
                                         '${book!.price} EGP',
                                         style: TextStyle(
                                           fontWeight: FontWeight.bold,
                                           fontSize: 25.sp,
                                         ),
                                       ),
-                                SizedBox(
-                                  width: 40.w,
-                                ),
-                                BlocConsumer<CartCubit, CartState>(
-                                  listener: (context, state) {},
-                                  builder: (context, state) {
-                                    return MaterialButton(
-                                      onPressed: () {
-                                        BlocProvider.of<CartCubit>(context)
-                                            .addToCart(bookId: book!.id!);
-                                      },
-                                      color: const Color(0xff00A3FF),
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(10.r),
+                                      SizedBox(
+                                        width: 40.w,
                                       ),
-                                      padding: const EdgeInsets.all(20).r,
-                                      minWidth: 150.w,
-                                      child: state is AddToCartLoading
-                                          ? SizedBox(
-                                              height: 20.h,
-                                              width: 20.w,
-                                              child:
-                                                  const CircularProgressIndicator(
-                                                color: Colors.white,
+                                      BlocConsumer<CartCubit, CartState>(
+                                        listener: (context, state) {},
+                                        builder: (context, state) {
+                                          if (book!.isFree! || book!.isOwned!) {
+                                            return MaterialButton(
+                                              onPressed: () {
+                                                //TODO: Implement Download Book Functionality.
+                                              },
+                                              color: AppColors.green,
+                                              shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(10.r),
                                               ),
-                                            )
-                                          : Text(
-                                              'Add To Cart',
-                                              style: TextStyle(
-                                                fontWeight: FontWeight.w500,
-                                                color: Colors.white,
-                                                fontSize: 20.sp,
+                                              padding:
+                                                  const EdgeInsets.all(20).r,
+                                              minWidth: 150.w,
+                                              child: state is AddToCartLoading
+                                                  ? SizedBox(
+                                                      height: 20.h,
+                                                      width: 20.w,
+                                                      child:
+                                                          const CircularProgressIndicator(
+                                                        color: Colors.white,
+                                                      ),
+                                                    )
+                                                  : Text(
+                                                      'Download',
+                                                      style: TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                        color: Colors.white,
+                                                        fontSize: 20.sp,
+                                                      ),
+                                                    ),
+                                            );
+                                          } else {
+                                            return MaterialButton(
+                                              onPressed: () {
+                                                BlocProvider.of<CartCubit>(
+                                                        context)
+                                                    .addToCart(
+                                                        bookId: book!.id!);
+                                              },
+                                              color: const Color(0xff00A3FF),
+                                              shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(10.r),
                                               ),
-                                            ),
-                                    );
-                                  },
-                                ),
-                              ],
-                            ),
+                                              padding:
+                                                  const EdgeInsets.all(20).r,
+                                              minWidth: 150.w,
+                                              child: state is AddToCartLoading
+                                                  ? SizedBox(
+                                                      height: 20.h,
+                                                      width: 20.w,
+                                                      child:
+                                                          const CircularProgressIndicator(
+                                                        color: Colors.white,
+                                                      ),
+                                                    )
+                                                  : Text(
+                                                      'Add To Cart',
+                                                      style: TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                        color: Colors.white,
+                                                        fontSize: 20.sp,
+                                                      ),
+                                                    ),
+                                            );
+                                          }
+                                        },
+                                      ),
+                                    ],
+                                  ),
                           ],
                         ),
                       ),

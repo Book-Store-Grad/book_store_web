@@ -34,68 +34,38 @@ class BookItem extends StatelessWidget {
             alignment: Alignment.center,
             child: Padding(
               padding: EdgeInsets.symmetric(vertical: 8.h, horizontal: 13.w),
-              child: Stack(
-                alignment: AlignmentDirectional.topEnd,
+              child: Column(
                 children: [
-                  Column(
-                    children: [
-                      Image.asset(
-                        AssetImages.cover,
-                        height: 270.h,
-                        width: 190.w,
-                        fit: BoxFit.fill,
-                      ),
-                      const Spacer(),
-                      Align(
-                        alignment: Alignment.center,
-                        child: Text(
-                          book.name!,
-                          style: TextStyle(
-                            fontWeight: FontWeight.w500,
-                            fontSize: 16.sp,
-                          ),
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                      ),
-                      Align(
-                        alignment: Alignment.center,
-                        child: Text(
-                          '${book.price} EGP',
-                          style: TextStyle(
-                            fontWeight: FontWeight.w500,
-                            fontSize: 16.sp,
-                            color: AppColors.primary,
-                          ),
-                          textAlign: TextAlign.start,
-                        ),
-                      ),
-                    ],
+                  Image.asset(
+                    AssetImages.cover,
+                    height: 270.h,
+                    width: 190.w,
+                    fit: BoxFit.fill,
                   ),
-                  Transform.translate(
-                    offset: Offset(5.w, -3.h),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        boxShadow: [
-                          BoxShadow(
-                            color: const Color.fromRGBO(0, 0, 0, 0.25),
-                            spreadRadius: 6.r,
-                            blurRadius: 12.r,
-                            offset: Offset(0.w, 4.h),
-                          ),
-                        ],
+                  const Spacer(),
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      book.name!,
+                      style: TextStyle(
+                        fontWeight: FontWeight.w500,
+                        fontSize: 16.sp,
                       ),
-                      child: CircleAvatar(
-                        backgroundColor: Colors.white,
-                        radius: 21.r,
-                        child: Icon(
-                          CupertinoIcons.heart_fill,
-                          color: Colors.red,
-                          size: 20.r,
-                        ),
-                      ),
+                      overflow: TextOverflow.ellipsis,
                     ),
-                  )
+                  ),
+                  Align(
+                    alignment: Alignment.centerRight,
+                    child: Text(
+                      '${book.price} EGP',
+                      style: TextStyle(
+                        fontWeight: FontWeight.w500,
+                        fontSize: 16.sp,
+                        color: AppColors.primary,
+                      ),
+                      textAlign: TextAlign.start,
+                    ),
+                  ),
                 ],
               ),
             ),

@@ -1,8 +1,8 @@
-import 'package:book_store_web/shared/widgets/default_skeleton.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../models/book.dart';
+import '../../../shared/widgets/default_skeleton.dart';
 import 'book_item.dart';
 import 'scroll_button.dart';
 
@@ -75,7 +75,7 @@ class _HomeSectionState extends State<HomeSection> {
             thickness: 2.5.r,
           ),
         ),
-        SizedBox(height: 10.h),
+        SizedBox(height: 40.h),
         SizedBox(
           height: 350.h,
           width: 1500.w,
