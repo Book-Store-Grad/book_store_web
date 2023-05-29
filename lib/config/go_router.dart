@@ -1,8 +1,3 @@
-import 'package:book_store_web/features/auth/pages/verification_page.dart';
-import 'package:book_store_web/features/author/pages/author_book_page.dart';
-import 'package:book_store_web/features/author/pages/author_books_page.dart';
-import 'package:book_store_web/features/home/pages/search_page.dart';
-import 'package:book_store_web/features/profile/pages/profile_page.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -10,6 +5,9 @@ import '../features/auth/pages/forgot_password_page.dart';
 import '../features/auth/pages/login_page.dart';
 import '../features/auth/pages/reset_password_page.dart';
 import '../features/auth/pages/signup_page.dart';
+import '../features/auth/pages/verification_page.dart';
+import '../features/author/pages/author_book_page.dart';
+import '../features/author/pages/author_books_page.dart';
 import '../features/book/pages/book_page.dart';
 import '../features/cart/pages/cart_page.dart';
 import '../features/cart/pages/checkout_page.dart';
@@ -17,6 +15,9 @@ import '../features/cart/pages/order_details_page.dart';
 import '../features/cart/pages/order_state_page.dart';
 import '../features/favorites/pages/favorites_page.dart';
 import '../features/home/pages/home_page.dart';
+import '../features/home/pages/search_page.dart';
+import '../features/profile/pages/profile_page.dart';
+import '../shared/pages/about_us_page.dart';
 
 final router = GoRouter(
   initialLocation: '/',
@@ -89,6 +90,10 @@ final router = GoRouter(
     GoRoute(
       path: VerificationPage.routeName,
       builder: (context, state) => const VerificationPage(),
+    ),
+    GoRoute(
+      path: AboutUsPage.routeName,
+      builder: (context, state) => const AboutUsPage(),
     ),
     GoRoute(
       name: AuthorBookPage.name,
