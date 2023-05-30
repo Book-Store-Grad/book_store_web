@@ -7,6 +7,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../business_logic/author/author_cubit.dart';
+import '../../../core/constants/app_constants.dart';
 import '../../../shared/widgets/default_text_form_field.dart';
 import '../../../styles/app_colors.dart';
 import 'add_image_dialog.dart';
@@ -21,12 +22,6 @@ class EditBookDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     AuthorCubit cubit = BlocProvider.of<AuthorCubit>(context);
-
-    final List<String> items = [
-      'Linguistics',
-      'Self Development',
-      'Technologies',
-    ];
 
     return AlertDialog(
       title: Text(
@@ -73,7 +68,7 @@ class EditBookDialog extends StatelessWidget {
                     ),
                     SizedBox(height: 10.h),
                     DropdownButtonFormField2(
-                      items: items
+                      items: kCategoriesList
                           .map(
                             (item) => DropdownMenuItem<String>(
                               value: item,

@@ -25,12 +25,6 @@ class AddBookDialog extends StatelessWidget {
     final TextEditingController genreController=TextEditingController();
     final TextEditingController descriptionController=TextEditingController();
 
-    final List<String> items = [
-      'Linguistics',
-      'Self Development',
-      'Technologies',
-    ];
-
     return AlertDialog(
       title: Text(
         'Add a book',
@@ -75,7 +69,7 @@ class AddBookDialog extends StatelessWidget {
                     ),
                     SizedBox(height: 10.h),
                     DropdownButtonFormField2(
-                      items: items
+                      items: kCategoriesList
                           .map(
                             (item) => DropdownMenuItem<String>(
                               value: item,
