@@ -14,7 +14,6 @@ class LoginRepository {
         validateStatus: (_) => true,
       ),
     );
-    ;
   }
 
   Future<Response> forgotPassword({

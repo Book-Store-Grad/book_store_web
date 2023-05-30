@@ -8,9 +8,7 @@ import 'package:otp_text_field/otp_text_field.dart';
 import 'package:otp_text_field/style.dart';
 
 import '../../../shared/widgets/default_button.dart';
-import '../../../shared/widgets/footer.dart';
 import '../../../styles/app_colors.dart';
-import '../widgets/auth_app_bar.dart';
 
 class VerificationPage extends StatelessWidget {
   const VerificationPage({Key? key}) : super(key: key);

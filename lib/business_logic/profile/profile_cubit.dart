@@ -70,10 +70,10 @@ class ProfileCubit extends Cubit<ProfileState> {
   File? image;
 
   chooseImage() async {
-    final _pickedFile = await ImagePicker().pickImage(source: ImageSource.gallery);
-    if (_pickedFile != null) {
-      var f =await _pickedFile.readAsBytes();
-      image=File(_pickedFile.path);
+    final pickedFile = await ImagePicker().pickImage(source: ImageSource.gallery);
+    if (pickedFile != null) {
+      var f =await pickedFile.readAsBytes();
+      image=File(pickedFile.path);
       webImage = f;
     }
     emit(ChooseImageState());
@@ -86,7 +86,7 @@ class ProfileCubit extends Cubit<ProfileState> {
         url: ApiConstants.profileImage,
         token: token,
         data: {
-          "image": await MultipartFile.fromBytes(webImage,
+          "image": MultipartFile.fromBytes(webImage,
              filename: image!.path.split('/').last,
              // contentType: MediaType('image', 'jpg')
           ),

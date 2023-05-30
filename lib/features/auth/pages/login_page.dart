@@ -7,9 +7,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../../business_logic/login/login_cubit.dart';
 import '../../home/pages/home_page.dart';
-import '../widgets/auth_app_bar.dart';
 import '../../../shared/widgets/default_button.dart';
-import '../../../shared/widgets/footer.dart';
 import '../widgets/auth_error_dialog.dart';
 import '../../../shared/widgets/default_text_form_field.dart';
 import 'forgot_password_page.dart';

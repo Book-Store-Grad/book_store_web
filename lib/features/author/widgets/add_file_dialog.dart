@@ -42,7 +42,7 @@ class AddFile extends StatelessWidget {
              //      ),
              //    )
              //        :
-              SizedBox(),
+              const SizedBox(),
                 TextButton(
                     onPressed: () async {
                       await cubit.chooseFile();

@@ -69,37 +69,41 @@ PreferredSizeWidget appBar(BuildContext context, {required bool isAuthor}) =>
                       child: DropdownButton2(
                         items: isAuthor
                             ? [
-                                ...MenuItems.firstAuthorItems.map(
-                                  (item) => DropdownMenuItem<MenuItem>(
-                                    value: item,
-                                    child: MenuItems.buildItem(item),
-                                  ),
+                          ...MenuItems.firstAuthorItems.map(
+                                (item) =>
+                                DropdownMenuItem<MenuItem>(
+                                  value: item,
+                                  child: MenuItems.buildItem(item),
                                 ),
-                                const DropdownMenuItem<Divider>(
-                                    enabled: false, child: Divider()),
-                                ...MenuItems.secondItems.map(
-                                  (item) => DropdownMenuItem<MenuItem>(
-                                    value: item,
-                                    child: MenuItems.buildItem(item),
-                                  ),
+                          ),
+                          const DropdownMenuItem<Divider>(
+                              enabled: false, child: Divider()),
+                          ...MenuItems.secondItems.map(
+                                (item) =>
+                                DropdownMenuItem<MenuItem>(
+                                  value: item,
+                                  child: MenuItems.buildItem(item),
                                 ),
-                              ]
+                          ),
+                        ]
                             : [
-                                ...MenuItems.firstCustomerItems.map(
-                                  (item) => DropdownMenuItem<MenuItem>(
-                                    value: item,
-                                    child: MenuItems.buildItem(item),
-                                  ),
+                          ...MenuItems.firstCustomerItems.map(
+                                (item) =>
+                                DropdownMenuItem<MenuItem>(
+                                  value: item,
+                                  child: MenuItems.buildItem(item),
                                 ),
-                                const DropdownMenuItem<Divider>(
-                                    enabled: false, child: Divider()),
-                                ...MenuItems.secondItems.map(
-                                  (item) => DropdownMenuItem<MenuItem>(
-                                    value: item,
-                                    child: MenuItems.buildItem(item),
-                                  ),
+                          ),
+                          const DropdownMenuItem<Divider>(
+                              enabled: false, child: Divider()),
+                          ...MenuItems.secondItems.map(
+                                (item) =>
+                                DropdownMenuItem<MenuItem>(
+                                  value: item,
+                                  child: MenuItems.buildItem(item),
                                 ),
-                              ],
+                          ),
+                        ],
                         onChanged: (value) {
                           MenuItems.onChanged(context, value as MenuItem);
                         },
@@ -114,27 +118,27 @@ PreferredSizeWidget appBar(BuildContext context, {required bool isAuthor}) =>
                         menuItemStyleData: MenuItemStyleData(
                           customHeights: isAuthor
                               ? [
-                                  ...List<double>.filled(
-                                    MenuItems.firstAuthorItems.length,
-                                    40.h,
-                                  ),
-                                  6.h,
-                                  ...List<double>.filled(
-                                    MenuItems.secondItems.length,
-                                    40.h,
-                                  ),
-                                ]
+                            ...List<double>.filled(
+                              MenuItems.firstAuthorItems.length,
+                              40.h,
+                            ),
+                            6.h,
+                            ...List<double>.filled(
+                              MenuItems.secondItems.length,
+                              40.h,
+                            ),
+                          ]
                               : [
-                                  ...List<double>.filled(
-                                    MenuItems.firstCustomerItems.length,
-                                    40.h,
-                                  ),
-                                  6.h,
-                                  ...List<double>.filled(
-                                    MenuItems.secondItems.length,
-                                    40.h,
-                                  ),
-                                ],
+                            ...List<double>.filled(
+                              MenuItems.firstCustomerItems.length,
+                              40.h,
+                            ),
+                            6.h,
+                            ...List<double>.filled(
+                              MenuItems.secondItems.length,
+                              40.h,
+                            ),
+                          ],
                         ),
                         customButton: const Chip(
                           label: Icon(Icons.keyboard_arrow_down),

@@ -89,11 +89,11 @@ class AuthorCubit extends Cubit<AuthorState> {
   Uint8List webBookImage = Uint8List(8);
 
   chooseBookImage() async {
-    final _pickedFile =
+    final pickedFile =
         await ImagePicker().pickImage(source: ImageSource.gallery);
-    if (_pickedFile != null) {
-      webBookImage = await _pickedFile.readAsBytes();
-      image = File(_pickedFile.path);
+    if (pickedFile != null) {
+      webBookImage = await pickedFile.readAsBytes();
+      image = File(pickedFile.path);
     }
     emit(ChooseBookImageState());
   }
@@ -106,7 +106,7 @@ class AuthorCubit extends Cubit<AuthorState> {
         token: token,
         data: {
           "book_id": 9,
-          "image": await MultipartFile.fromBytes(
+          "image": MultipartFile.fromBytes(
             webBookImage,
             filename: image!.path.split('/').last,
           ),
@@ -132,7 +132,7 @@ class AuthorCubit extends Cubit<AuthorState> {
     );
     try {
       if (result != null) {
-        webBookFile = await result.files.first.bytes!;
+        webBookFile = result.files.first.bytes!;
       } else {
         print("error in file picker function !");
       }
@@ -150,7 +150,7 @@ class AuthorCubit extends Cubit<AuthorState> {
         token: token,
         data: {
           "book_id": 2,
-          "file": await MultipartFile.fromBytes(
+          "file": MultipartFile.fromBytes(
             webBookFile,
             // filename: filepath!.split('/').last,
           ),

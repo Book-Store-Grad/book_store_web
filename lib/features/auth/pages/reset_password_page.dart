@@ -7,9 +7,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../styles/app_colors.dart';
-import '../widgets/auth_app_bar.dart';
 import '../../../shared/widgets/default_button.dart';
-import '../../../shared/widgets/footer.dart';
 import '../../../shared/widgets/default_text_form_field.dart';
 
 class ResetPasswordPage extends StatelessWidget {

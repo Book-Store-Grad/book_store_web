@@ -39,7 +39,7 @@ class AddImage extends StatelessWidget {
             child: Column(
               children: [
                 cubit.image != null
-                    ? Container(
+                    ? SizedBox(
                         width: 200.w,
                         height: 200.h,
                         child: Card(
@@ -52,7 +52,7 @@ class AddImage extends StatelessWidget {
                           ),
                         ),
                       )
-                    : SizedBox(),
+                    : const SizedBox(),
                 TextButton(
                     onPressed: () async {
                       await cubit.chooseBookImage();

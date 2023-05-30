@@ -1,6 +1,5 @@
 import 'package:bloc/bloc.dart';
 import 'package:book_store_web/features/cart/repository/cart_repository.dart';
-import 'package:book_store_web/models/book.dart';
 import 'package:book_store_web/models/cart.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
