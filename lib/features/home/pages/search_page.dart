@@ -1,11 +1,11 @@
-import 'package:book_store_web/business_logic/home/home_cubit.dart';
-import 'package:book_store_web/features/home/widgets/search_section.dart';
-import 'package:book_store_web/shared/widgets/app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../business_logic/home/home_cubit.dart';
+import '../../../shared/widgets/app_bar.dart';
 import '../widgets/search_item.dart';
+import '../widgets/search_section.dart';
 
 class SearchPage extends StatelessWidget {
   const SearchPage({Key? key}) : super(key: key);
@@ -22,11 +22,14 @@ class SearchPage extends StatelessWidget {
           child: Column(
             children: [
               SearchSection(
-                  searchController:
-                      BlocProvider.of<HomeCubit>(context).searchController),
+                searchController:
+                    BlocProvider.of<HomeCubit>(context).searchController,
+              ),
               Padding(
-                padding:
-                    EdgeInsets.symmetric(horizontal: 150.h, vertical: 25.h),
+                padding: EdgeInsets.symmetric(
+                  horizontal: 150.h,
+                  vertical: 25.h,
+                ),
                 child: BlocBuilder<HomeCubit, HomeState>(
                   builder: (context, state) {
                     if (state is SearchLoading) {
@@ -41,7 +44,8 @@ class SearchPage extends StatelessWidget {
                           crossAxisCount: 4,
                           crossAxisSpacing: 10.w,
                         ),
-                        itemBuilder: (context, index) =>  SearchItem(book: state.searchedBooks[index]),
+                        itemBuilder: (context, index) =>
+                            SearchItem(book: state.searchedBooks[index]),
                         itemCount: state.searchedBooks.length,
                         scrollDirection: Axis.vertical,
                         shrinkWrap: true,

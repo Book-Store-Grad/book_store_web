@@ -1,3 +1,4 @@
+import 'package:book_store_web/features/home/pages/categories_page.dart';
 import 'package:book_store_web/features/home/pages/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -53,11 +54,11 @@ class _NavBarState extends State<NavBar> {
             TextButton(
               onPressed: () {
                 if (isHome) {
-                  globalCubit.selectNavItem(1, HomeSections.linguistics);
+                  globalCubit.selectNavItem(1, HomeSections.business);
                 }
               },
               child: Text(
-                'Linguistics',
+                'Business',
                 style: TextStyle(
                   color: isHome
                       ? globalCubit.selectedNavItemIndex == 1
@@ -74,11 +75,11 @@ class _NavBarState extends State<NavBar> {
             TextButton(
               onPressed: () {
                 if (isHome) {
-                  globalCubit.selectNavItem(2, HomeSections.selfDevelopment);
+                  globalCubit.selectNavItem(2, HomeSections.classic);
                 }
               },
               child: Text(
-                'Self-Development',
+                'Classic',
                 style: TextStyle(
                   color: isHome
                       ? globalCubit.selectedNavItemIndex == 2
@@ -95,11 +96,11 @@ class _NavBarState extends State<NavBar> {
             TextButton(
               onPressed: () {
                 if (isHome) {
-                  globalCubit.selectNavItem(3, HomeSections.technologies);
+                  globalCubit.selectNavItem(3, HomeSections.technology);
                 }
               },
               child: Text(
-                'Technologies',
+                'Technology',
                 style: TextStyle(
                   color: isHome
                       ? globalCubit.selectedNavItemIndex == 3
@@ -109,6 +110,20 @@ class _NavBarState extends State<NavBar> {
                   fontWeight: FontWeight.w500,
                   fontSize: 21.sp,
                   fontFamily: 'DMMono',
+                ),
+              ),
+            ),
+            SizedBox(width: 10.w),
+            TextButton(
+              onPressed: () {
+                context.go(CategoriesPage.routeName);
+              },
+              child: Text(
+                'All Categories',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontFamily: 'DMMono',
+                  fontSize: 18.sp,
                 ),
               ),
             ),

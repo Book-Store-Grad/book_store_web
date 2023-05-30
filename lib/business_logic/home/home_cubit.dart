@@ -11,9 +11,9 @@ class HomeCubit extends Cubit<HomeState> {
 
   final ScrollController scrollController = ScrollController();
   final GlobalKey homeKey = GlobalKey();
-  final GlobalKey linguisticsKey = GlobalKey();
-  final GlobalKey selfDevelopmentKey = GlobalKey();
-  final GlobalKey technologiesKey = GlobalKey();
+  final GlobalKey businessKey = GlobalKey();
+  final GlobalKey classicKey = GlobalKey();
+  final GlobalKey technologyKey = GlobalKey();
   int selectedNavItemIndex = 0;
 
   void selectNavItem(int index, HomeSections section) {
@@ -28,25 +28,25 @@ class HomeCubit extends Cubit<HomeState> {
         );
         break;
 
-      case HomeSections.linguistics:
+      case HomeSections.business:
         Scrollable.ensureVisible(
-          linguisticsKey.currentContext!,
+          businessKey.currentContext!,
           duration: const Duration(seconds: 1),
           curve: Curves.easeOut,
         );
         break;
 
-      case HomeSections.selfDevelopment:
+      case HomeSections.classic:
         Scrollable.ensureVisible(
-          selfDevelopmentKey.currentContext!,
+          classicKey.currentContext!,
           duration: const Duration(seconds: 1),
           curve: Curves.easeOut,
         );
         break;
 
-      case HomeSections.technologies:
+      case HomeSections.technology:
         Scrollable.ensureVisible(
-          technologiesKey.currentContext!,
+          technologyKey.currentContext!,
           duration: const Duration(seconds: 1),
           curve: Curves.easeOut,
         );
@@ -105,4 +105,4 @@ class HomeCubit extends Cubit<HomeState> {
   }
 }
 
-enum HomeSections { home, linguistics, selfDevelopment, technologies }
+enum HomeSections { home, business, classic, technology }

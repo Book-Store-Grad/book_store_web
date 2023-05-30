@@ -1,3 +1,5 @@
+import 'package:book_store_web/features/home/pages/categories_page.dart';
+import 'package:book_store_web/features/home/pages/category_page.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -96,11 +98,24 @@ final router = GoRouter(
       builder: (context, state) => const AboutUsPage(),
     ),
     GoRoute(
+      path: CategoriesPage.routeName,
+      builder: (context, state) => const CategoriesPage(),
+    ),
+    GoRoute(
       name: AuthorBookPage.name,
       path: AuthorBookPage.routeName,
       builder: (context, state) {
         return AuthorBookPage(
           id: int.parse(state.params['id']!),
+        );
+      },
+    ),
+    GoRoute(
+      name: CategoryPage.name,
+      path: CategoryPage.routeName,
+      builder: (context, state) {
+        return CategoryPage(
+          categoryName: state.params['categoryName'].toString(),
         );
       },
     ),
