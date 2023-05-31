@@ -1,3 +1,4 @@
+import 'package:book_store_web/models/book.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -6,8 +7,10 @@ import '../../../styles/app_colors.dart';
 
 class CheckoutItem extends StatelessWidget {
   const CheckoutItem({
-    super.key,
+    super.key, required this.bookName, this.bookPrice,
   });
+  final String bookName;
+  final dynamic bookPrice;
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +22,7 @@ class CheckoutItem extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'The Book Cover',
+              '${bookName}',
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 23.sp,
@@ -27,7 +30,7 @@ class CheckoutItem extends StatelessWidget {
             ),
             SizedBox(height: 10.h),
             Text(
-              '300.50 EGP',
+              '${bookPrice} EGP',
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 21.5.sp,

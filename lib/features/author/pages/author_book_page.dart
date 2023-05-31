@@ -65,14 +65,28 @@ class AuthorBookPage extends StatelessWidget {
                           children: [
                             book == null
                                 ? DefaultSkeleton(height: 40.h, width: 400.w)
-                                : Text(
-                                    '${book!.name}',
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 35.sp,
+                                : Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                        '${book!.name}',
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 35.sp,
+                                        ),
+                                      ),
+                                    SizedBox(height: 5.h,),
+                                    Text(
+                                      '${book!.category}',
+                                      style: TextStyle(
+                                        fontSize: 17.sp,
+                                        color: Colors.black54,
+                                        fontWeight: FontWeight.w500,
+                                      ),
                                     ),
-                                  ),
-                            SizedBox(height: 12.h),
+                                  ],
+                                ),
+                            SizedBox(height: 50.h),
                             book == null
                                 ? SizedBox(
                                     child: SizedBox(
@@ -97,111 +111,28 @@ class AuthorBookPage extends StatelessWidget {
                                     height: 220.h,
                                     child: SingleChildScrollView(
                                       dragStartBehavior: DragStartBehavior.down,
-                                      child: Text(
-                                        '${book!.description}',
-                                        style: TextStyle(
-                                          fontSize: 18.sp,
-                                        ),
+                                      child: Column(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            'About book',
+                                            style: TextStyle(
+                                              fontSize: 18.sp,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                          SizedBox(height: 10.h),
+                                          Text(
+                                            '${book!.description}',
+                                            style: TextStyle(
+                                              fontSize: 18.sp,
+                                            ),
+                                          ),
+                                        ],
                                       ),
                                     ),
                                   ),
                             SizedBox(height: 40.h),
-                            Table(
-                              border: TableBorder(
-                                bottom: BorderSide(
-                                    color: Colors.black, width: 0.5.w),
-                                top: BorderSide(
-                                    color: Colors.black, width: 0.5.w),
-                                horizontalInside: BorderSide(
-                                    color: Colors.black, width: 0.5.w),
-                                verticalInside: BorderSide(
-                                    color: Colors.black, width: 0.5.w),
-                              ),
-                              children: [
-                                TableRow(
-                                  children: [
-                                    TableCell(
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(6).r,
-                                        child: Text(
-                                          '    Author',
-                                          style: TextStyle(
-                                              fontSize: 17.sp,
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                      ),
-                                    ),
-                                    TableCell(
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(6).r,
-                                        child: Text(
-                                          '       Hazem Osama',
-                                          style: TextStyle(fontSize: 17.sp),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                TableRow(
-                                  children: [
-                                    TableCell(
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(6).r,
-                                        child: Text(
-                                          '    ISBN',
-                                          style: TextStyle(
-                                              fontSize: 17.sp,
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                      ),
-                                    ),
-                                    TableCell(
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(6).r,
-                                        child: Text(
-                                          '       978-123456789',
-                                          style: TextStyle(fontSize: 17.sp),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                TableRow(
-                                  children: [
-                                    TableCell(
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(6).r,
-                                        child: Text(
-                                          '    Category',
-                                          style: TextStyle(
-                                              fontSize: 17.sp,
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                      ),
-                                    ),
-                                    TableCell(
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(6).r,
-                                        child: book == null
-                                            ? Align(
-                                                alignment: Alignment.center,
-                                                child: DefaultSkeleton(
-                                                  height: 30.h,
-                                                  width: 175.w,
-                                                ),
-                                              )
-                                            : Text(
-                                                '       ${book!.category}',
-                                                style: TextStyle(
-                                                  fontSize: 17.sp,
-                                                ),
-                                              ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
                             SizedBox(height: 32.5.h),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
