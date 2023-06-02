@@ -33,7 +33,7 @@ class Footer extends StatelessWidget {
           ),
           SizedBox(
             width: 225.w,
-            child: const Row(
+            child:  Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Icon(FontAwesomeIcons.facebook, color: Colors.white),

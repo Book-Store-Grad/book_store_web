@@ -12,7 +12,14 @@ import '../../../styles/app_colors.dart';
 class FavoriteItem extends StatelessWidget {
   final int favId;
   final int bookId;
-  const FavoriteItem({super.key, required this.favId, required this.bookId});
+  final String bookName;
+  final String description;
+  const FavoriteItem(
+      {super.key,
+      required this.favId,
+      required this.bookId,
+      required this.bookName,
+      required this.description});
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +39,8 @@ class FavoriteItem extends StatelessWidget {
             children: [
               TextButton(
                 onPressed: () {
-                  context.goNamed(BookPage.name, params: {'id': bookId.toString()});
+                  context.goNamed(BookPage.name,
+                      params: {'id': bookId.toString()});
                 },
                 style: TextButton.styleFrom(
                   minimumSize: Size.zero,
@@ -40,7 +48,7 @@ class FavoriteItem extends StatelessWidget {
                   tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                 ),
                 child: Text(
-                  "bookName",
+                  bookName,
                   style: TextStyle(
                     fontSize: 22.sp,
                     fontWeight: FontWeight.bold,
@@ -49,7 +57,7 @@ class FavoriteItem extends StatelessWidget {
               ),
               SizedBox(height: 10.h),
               Text(
-                "jjj",
+                description,
                 style: TextStyle(
                   fontSize: 18.sp,
                 ),
@@ -80,4 +88,10 @@ class FavoriteItem extends StatelessWidget {
       ],
     );
   }
+
+  // @override
+  // void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+  //   super.debugFillProperties(properties);
+  //   properties.add(StringProperty('Description', Description));
+  // }
 }

@@ -16,9 +16,7 @@ class FavoritesPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) =>
-      FavouriteCubit()
-        ..getAllFavItems(),
+      create: (context) => FavouriteCubit()..getAllFavItems(),
       child: BlocConsumer<FavouriteCubit, FavouriteState>(
         listener: (context, state) {},
         builder: (context, state) {
@@ -28,7 +26,7 @@ class FavoritesPage extends StatelessWidget {
             body: SingleChildScrollView(
               child: Padding(
                 padding:
-                EdgeInsets.symmetric(horizontal: 125.w, vertical: 40.h),
+                    EdgeInsets.symmetric(horizontal: 125.w, vertical: 40.h),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -45,18 +43,21 @@ class FavoritesPage extends StatelessWidget {
                         children: [
                           SizedBox(height: 45.h),
                           ListView.separated(
-                            itemBuilder: (context, index) =>
-                            state is GetAllFavouriteLoading
+                            itemBuilder: (context, index) => state
+                                    is GetAllFavouriteLoading
                                 ? const FavSkeleton()
-                                :  FavoriteItem(
-                              favId: cubit.favItems[index].favId,
-                              bookId: cubit.favItems[index].bookId,
-                            ),
+                                : FavoriteItem(
+                                    favId: cubit.favItems[index].favId,
+                                    bookId: cubit.favItems[index].bookId,
+                                    bookName: cubit.favItems[index].bookName!,
+                                    description:
+                                        cubit.favItems[index].description!,
+                                  ),
                             separatorBuilder: (context, index) =>
                                 SizedBox(height: 30.h),
                             itemCount: state is GetAllFavouriteLoading
-                            ?5
-                            :cubit.favItems.length,
+                                ? 5
+                                : cubit.favItems.length,
                             shrinkWrap: true,
                             physics: const NeverScrollableScrollPhysics(),
                           ),
