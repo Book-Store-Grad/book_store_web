@@ -82,6 +82,25 @@ class ProfilePage extends StatelessWidget {
                                                   "Authorization":
                                                       "Bearer $token",
                                                 },
+                                                errorBuilder: (context, error,
+                                                    stackTrace) =>
+                                                    Center(
+                                                      child: Container(
+                                                        clipBehavior:
+                                                        Clip.antiAlias,
+                                                        decoration: BoxDecoration(
+                                                          borderRadius:
+                                                          BorderRadius
+                                                              .circular(10),
+                                                        ),
+                                                        child: Image.asset(
+                                                          "assets/images/profile.png",
+                                                          width: 130.w,
+                                                          height: 150.h,
+                                                          fit: BoxFit.cover,
+                                                        ),
+                                                      ),
+                                                    ),
                                               ),
                                             ),
                                     ),

@@ -21,7 +21,7 @@ class ProfileRepo {
     required String gender,
   }) async {
     return await Dio().get(ApiConstants.profile,
-        data: {"cu_name": name, "cu_email": email, "cu_gender": gender},
+        data: {"name": name,  "gender": gender},
         options: Options(
           contentType: Headers.jsonContentType,
           validateStatus: (_) => true,

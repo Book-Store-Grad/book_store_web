@@ -8,10 +8,10 @@ class User {
 
   User.fromJson(Map<String, dynamic> json) {
     accessToken = json["access_token"];
-    id = json["content"]["customer"]["cu_id"];
-    name = json["content"]["customer"]["cu_name"];
-    email = json["content"]["customer"]["cu_email"];
-    gender = json["content"]["customer"]["cu_gender"];
-    role = json["content"]["customer"]["cu_role"];
+    id = json["content"]["user"]["u_id"];
+    name = json["content"]["user"]["u_name"];
+    email = json["content"]["user"]["u_email"];
+    gender = json["content"]["user"]["u_gender"];
+    role = json["content"]["user"]["u_role"];
   }
 }

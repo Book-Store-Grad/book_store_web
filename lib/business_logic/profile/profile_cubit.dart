@@ -9,7 +9,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 
-
 part 'profile_state.dart';
 
 class ProfileCubit extends Cubit<ProfileState> {
@@ -33,16 +32,15 @@ class ProfileCubit extends Cubit<ProfileState> {
         print(value.data);
         if (value.statusCode == 200) {
           profile = Profile.fromJson(value.data);
-          nameController.text = profile!.content.customer.cuName;
-          emailController.text = profile!.content.customer.cuEmail;
-          genderController.text = profile!.content.customer.cuGender;
+          nameController.text = profile!.content!.customer!.uName!;
+          emailController.text = profile!.content!.customer!.uEmail!;
+          genderController.text = profile!.content!.customer!.uGender!;
           print("Get Profile successfully !");
-        } else {
-          print("Get Profile Error !");
         }
         emit(ProfileSuccessState());
       }).catchError((e) {
         emit(ProfileErrorState());
+        print(e.toString());
       });
     }
   }
@@ -70,10 +68,11 @@ class ProfileCubit extends Cubit<ProfileState> {
   File? image;
 
   chooseImage() async {
-    final pickedFile = await ImagePicker().pickImage(source: ImageSource.gallery);
+    final pickedFile =
+        await ImagePicker().pickImage(source: ImageSource.gallery);
     if (pickedFile != null) {
-      var f =await pickedFile.readAsBytes();
-      image=File(pickedFile.path);
+      var f = await pickedFile.readAsBytes();
+      image = File(pickedFile.path);
       webImage = f;
     }
     emit(ChooseImageState());
@@ -86,16 +85,16 @@ class ProfileCubit extends Cubit<ProfileState> {
         url: ApiConstants.profileImage,
         token: token,
         data: {
-          "image": MultipartFile.fromBytes(webImage,
-             filename: image!.path.split('/').last,
-             // contentType: MediaType('image', 'jpg')
+          "image": MultipartFile.fromBytes(
+            webImage,
+            filename: image!.path.split('/').last,
+            // contentType: MediaType('image', 'jpg')
           ),
         }).then((value) {
       print(value.statusCode);
       if (value.statusCode == 200) {
         print("Image Updated Successfully !");
-      }
-      else{
+      } else {
         print("Somthing went wrong !");
       }
       emit(UpdateProfileImageSuccessState());

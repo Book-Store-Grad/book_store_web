@@ -15,8 +15,8 @@ class ApiConstants {
   static const String getAllFav = '$baseUrl/favorite/all';
   static const String favorite = '$baseUrl/favorite';
   ///Profile
-  static const String profile = '$baseUrl/customer/profile';
-  static const String profileImage = '$baseUrl/customer/image';
+  static const String profile = '$baseUrl/user/profile';
+  static const String profileImage = '$baseUrl/user/image';
 
 
 }

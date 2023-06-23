@@ -1,50 +1,40 @@
 class Profile {
-  Profile({
-    required this.message,
-    required this.content,
-  });
-  late final String message;
-  late final Content content;
+  Content? content;
 
-  Profile.fromJson(Map<String, dynamic> json){
-    message = json['message']??"";
-    content = Content.fromJson(json['content']??"");
+  Profile({this.content});
+
+  Profile.fromJson(Map<String, dynamic> json) {
+    content =
+    json['content'] != null ? new Content.fromJson(json['content']) : null;
   }
 }
 
 class Content {
-  Content({
-    required this.customer,
-  });
-  late final Customer customer;
+  Customer? customer;
 
-  Content.fromJson(Map<String, dynamic> json){
-    customer = Customer.fromJson(json['customer']??"");
+  Content({this.customer});
+
+  Content.fromJson(Map<String, dynamic> json) {
+    customer = json['customer'] != null
+        ? new Customer.fromJson(json['customer'])
+        : null;
   }
 }
 
 class Customer {
-  Customer({
-    required this.cuId,
-    required this.cuName,
-    required this.cuEmail,
-    required this.cuGender,
-    required this.cuRole,
-    required this.cuCreatedOn,
-  });
-  late final int cuId;
-  late final String cuName;
-  late final String cuEmail;
-  late final String cuGender;
-  late final String cuRole;
-  late final String cuCreatedOn;
+  int? uId;
+  String? uName;
+  String? uEmail;
+  String? uGender;
+  String? uRole;
 
-  Customer.fromJson(Map<String, dynamic> json){
-    cuId = json['cu_id']??"";
-    cuName = json['cu_name']??"";
-    cuEmail = json['cu_email']??"";
-    cuGender = json['cu_gender']??"";
-    cuRole = json['cu_role']??"";
-    cuCreatedOn = json['cu_created_on']??"";
+  Customer({this.uId, this.uName, this.uEmail, this.uGender, this.uRole});
+
+  Customer.fromJson(Map<String, dynamic> json) {
+    uId = json['u_id'];
+    uName = json['u_name'];
+    uEmail = json['u_email'];
+    uGender = json['u_gender'];
+    uRole = json['u_role'];
   }
 }
