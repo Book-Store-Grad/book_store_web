@@ -117,6 +117,8 @@ class _CartPageState extends State<CartPage> {
                             );
                           },
                         ),
+                        SizedBox(height: 30.h),
+                        const Footer(),
                       ],
                     ),
                   ),
@@ -124,7 +126,6 @@ class _CartPageState extends State<CartPage> {
               ),
             ),
           ),
-          bottomNavigationBar: const Footer(),
         );
       },
     );

@@ -152,6 +152,7 @@ class _BookPageState extends State<BookPage> {
                                             ),
                                           )
                                         : SizedBox(
+                                      height: 140.h,
                                             child: SingleChildScrollView(
                                               dragStartBehavior:
                                                   DragStartBehavior.down,
