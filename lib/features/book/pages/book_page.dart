@@ -1,15 +1,16 @@
 import 'package:book_store_web/business_logic/favourite/favourite_cubit.dart';
+import 'package:book_store_web/core/constants/api_constants.dart';
 import 'package:book_store_web/styles/app_colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:universal_html/html.dart' as html;
 
 import '../../../business_logic/book/book_cubit.dart';
 import '../../../business_logic/cart/cart_cubit.dart';
 import '../../../business_logic/home/home_cubit.dart';
-import '../../../core/utils/asset_imgaes.dart';
 import '../../../models/book.dart';
 import '../../../shared/widgets/app_bar.dart';
 import '../../../shared/widgets/default_skeleton.dart';
@@ -33,6 +34,10 @@ class BookPage extends StatefulWidget {
 
 class _BookPageState extends State<BookPage> {
   Book? book;
+
+  Future<void> download({required String url}) async {
+    html.window.open(url, "_blank");
+  }
 
   void getBook() async {
     await BlocProvider.of<BookCubit>(context, listen: false)
@@ -66,11 +71,27 @@ class _BookPageState extends State<BookPage> {
                   ),
                   child: Row(
                     children: [
-                      Image.asset(
-                        AssetImages.bigCover,
+                      book ==null
+                      ? DefaultSkeleton(height: 530.h, width: 365.w)
+                      : Image.network(
+                         ApiConstants.imageUrl + book!.coverImageUrl!,
                         height: 530.h,
                         width: 365.w,
                         fit: BoxFit.fill,
+                        errorBuilder: (context, error, stackTrace) => Center(
+                          child: Container(
+                            clipBehavior: Clip.antiAlias,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: Image.asset(
+                              "assets/images/cover.png",
+                              height: 530.h,
+                              width: 365.w,
+                              fit: BoxFit.fill,
+                            ),
+                          ),
+                        ),
                       ),
                       const Spacer(),
                       SizedBox(
@@ -239,6 +260,7 @@ class _BookPageState extends State<BookPage> {
                                         style: TextStyle(
                                           fontWeight: FontWeight.bold,
                                           fontSize: 25.sp,
+                                          color: book!.price == 0 ?Colors.green :AppColors.primary,
                                         ),
                                       ),
                                       SizedBox(
@@ -252,12 +274,15 @@ class _BookPageState extends State<BookPage> {
                                               book!.price == 0) {
                                             return MaterialButton(
                                               onPressed: () {
-                                                BlocProvider.of<BookCubit>(
-                                                        context)
-                                                    .getBookFile(
-                                                  bookId: book!.id!,
-                                                  bName: book!.name!,
-                                                );
+                                                download(
+                                                    url:
+                                                        '${ApiConstants.book}/${book!.id}/file');
+                                                // BlocProvider.of<BookCubit>(
+                                                //         context)
+                                                //     .getBookFile(
+                                                //   bookId: book!.id!,
+                                                //   bName: book!.name!,
+                                                // );
                                               },
                                               color: AppColors.green,
                                               shape: RoundedRectangleBorder(

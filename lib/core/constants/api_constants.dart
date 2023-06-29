@@ -1,5 +1,9 @@
 class ApiConstants {
-  static const String baseUrl = "https://bookstore-api-9pzk.onrender.com";
+
+ // static const String baseUrl = "https://bookstore-api-9pzk.onrender.com";
+  static const String baseUrl = "http://localhost:8005";
+  static const String imageUrl = "http://localhost:8005";
+
   ///Auth
   static const String login = "$baseUrl/auth";
   static const String signup = "$baseUrl/auth/signup";
