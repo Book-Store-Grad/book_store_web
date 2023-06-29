@@ -1,3 +1,4 @@
+import 'package:book_store_web/core/utils/string_capitalize.dart';
 import 'package:book_store_web/features/home/repository/home_repository.dart';
 import 'package:book_store_web/models/book.dart';
 import 'package:dio/dio.dart';
@@ -86,11 +87,58 @@ class HomeCubit extends Cubit<HomeState> {
     emit(ClearSearchState());
   }
 
-  // ----------------------------------------------------------------------------
+  // ---------------------------------------------------------------------------
+
+  void getCategoryBook(String categoryName) async {
+    emit(GetCategoryBooksLoading());
+    await getAlLBooks();
+    switch (categoryName.capitalize()) {
+      case 'Business':
+        print(businessBooks);
+        emit(GetCategoryBooksSuccessState(categoryBooks: businessBooks));
+        break;
+      case 'Entertainment':
+        emit(GetCategoryBooksSuccessState(categoryBooks: entertainmentBooks));
+        break;
+      case 'Fiction':
+      emit(GetCategoryBooksSuccessState(categoryBooks: fictionBooks));
+        break;
+      case 'Political':
+      emit(GetCategoryBooksSuccessState(categoryBooks: politicalBooks));
+        break;
+      case 'Technology':
+      emit(GetCategoryBooksSuccessState(categoryBooks: technologyBooks));
+        break;
+      case 'Education':
+      emit(GetCategoryBooksSuccessState(categoryBooks: educationBooks));
+        break;
+      case 'History':
+      emit(GetCategoryBooksSuccessState(categoryBooks: historyBooks));
+        break;
+      case 'Science':
+      emit(GetCategoryBooksSuccessState(categoryBooks: scienceBooks));
+        break;
+      case 'Classic':
+      emit(GetCategoryBooksSuccessState(categoryBooks: classicBooks));
+        break;
+    }
+  }
+
+  // ---------------------------------------------------------------------------
 
   // Repository
   HomeRepository homeRepository = HomeRepository();
   List<Book> books = [];
+  List<Book> businessBooks = [];
+  List<Book> classicBooks = [];
+  List<Book> technologyBooks = [];
+  List<Book> educationBooks = [];
+  List<Book> historyBooks = [];
+  List<Book> fictionBooks = [];
+  List<Book> politicalBooks = [];
+  List<Book> scienceBooks = [];
+  List<Book> entertainmentBooks = [];
+
 
   // Get All Books
   Future<void> getAlLBooks() async {
@@ -100,6 +148,17 @@ class HomeCubit extends Cubit<HomeState> {
       books.add(
         Book.fromJson(jsonBook),
       );
+    }
+    for(Book book in books) {
+      if (book.category == 'Business') {businessBooks.add(book);}
+      else if (book.category == 'Entertainment') {educationBooks.add(book);}
+      else if (book.category == 'Fiction') {fictionBooks.add(book);}
+      else if (book.category == 'Political') {politicalBooks.add(book);}
+      else if (book.category == 'Technology') {technologyBooks.add(book);}
+      else if (book.category == 'Education') {educationBooks.add(book);}
+      else if (book.category == 'History') {historyBooks.add(book);}
+      else if (book.category == 'Science') {scienceBooks.add(book);}
+      else if (book.category == 'Classic') {classicBooks.add(book);}
     }
     emit(GetAllBooksSuccessState());
   }

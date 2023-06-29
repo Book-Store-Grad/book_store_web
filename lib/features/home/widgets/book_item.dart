@@ -56,7 +56,7 @@ class BookItem extends StatelessWidget {
                   Align(
                     alignment: Alignment.centerRight,
                     child: Text(
-                      '${book.price} EGP',
+                      book.price == 0 ? 'Free' : '${book.price} EGP',
                       style: TextStyle(
                         fontWeight: FontWeight.w500,
                         fontSize: 16.sp,

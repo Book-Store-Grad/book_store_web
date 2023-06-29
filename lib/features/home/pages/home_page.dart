@@ -46,19 +46,19 @@ class HomePage extends StatelessWidget {
                     HomeSection(
                       label: 'Business',
                       scrollKey: cubit.businessKey,
-                      books: cubit.books,
+                      books: cubit.businessBooks,
                     ),
                     SizedBox(height: 100.h),
                     HomeSection(
                       label: 'Classic',
                       scrollKey: cubit.classicKey,
-                      books: cubit.books,
+                      books: cubit.classicBooks,
                     ),
                     SizedBox(height: 100.h),
                     HomeSection(
                       label: 'Technology',
                       scrollKey: cubit.technologyKey,
-                      books: cubit.books,
+                      books: cubit.technologyBooks,
                     ),
                   ],
                 ),

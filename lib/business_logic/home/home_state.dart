@@ -24,3 +24,15 @@ class ClearSearchState extends HomeState {}
 class GetAllBooksLoadingState extends HomeState {}
 
 class GetAllBooksSuccessState extends HomeState {}
+
+class GetCategoryBooksLoading extends HomeState {}
+
+class GetCategoryBooksSuccessState extends HomeState {
+  final List<Book> categoryBooks;
+
+  GetCategoryBooksSuccessState({
+    required this.categoryBooks,
+  });
+}
+
+class GetCategoryBooksEmptyState extends HomeState {}

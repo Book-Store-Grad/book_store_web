@@ -16,3 +16,5 @@ class GetBookSuccessState extends BookState {
 class GetBookFileLoadingState extends BookState {}
 
 class GetBookFileSuccessState extends BookState {}
+
+class GetBookFileErrorState extends BookState {}
