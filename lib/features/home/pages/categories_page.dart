@@ -22,7 +22,7 @@ class CategoriesPage extends StatelessWidget {
         child: GridView.builder(
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 3,
-            childAspectRatio: 1.5 / 1,
+            childAspectRatio: 1.7 / 1,
             crossAxisSpacing: 10.w,
             mainAxisSpacing: 10.h,
           ),
@@ -56,7 +56,7 @@ class CategoryItem extends StatelessWidget {
           );
         },
         child: SizedBox(
-          height: 200,
+          height: 170,
           child: Stack(
             fit: StackFit.expand,
             children: [

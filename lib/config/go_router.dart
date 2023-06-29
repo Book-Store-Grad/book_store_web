@@ -1,5 +1,6 @@
 import 'package:book_store_web/features/home/pages/categories_page.dart';
 import 'package:book_store_web/features/home/pages/category_page.dart';
+import 'package:book_store_web/models/book.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

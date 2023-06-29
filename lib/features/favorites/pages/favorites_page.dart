@@ -64,11 +64,12 @@ class FavoritesPage extends StatelessWidget {
                         ],
                       ),
                     ),
+                    SizedBox(height: 30.h),
+                    const Footer(),
                   ],
                 ),
               ),
             ),
-            bottomNavigationBar: const Footer(),
           );
         },
       ),

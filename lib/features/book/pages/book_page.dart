@@ -152,6 +152,7 @@ class _BookPageState extends State<BookPage> {
                                             ),
                                           )
                                         : SizedBox(
+                                            height: 140.h,
                                             child: SingleChildScrollView(
                                               dragStartBehavior:
                                                   DragStartBehavior.down,
@@ -232,7 +233,9 @@ class _BookPageState extends State<BookPage> {
                                         ),
                                       ),
                                       Text(
-                                        '${book!.price} EGP',
+                                        book!.price == 0
+                                            ? 'Free'
+                                            : '${book!.price} EGP',
                                         style: TextStyle(
                                           fontWeight: FontWeight.bold,
                                           fontSize: 25.sp,
@@ -244,10 +247,17 @@ class _BookPageState extends State<BookPage> {
                                       BlocConsumer<CartCubit, CartState>(
                                         listener: (context, state) {},
                                         builder: (context, state) {
-                                          if (book!.isFree! || book!.isOwned!) {
+                                          if (book!.isFree! ||
+                                              book!.isOwned! ||
+                                              book!.price == 0) {
                                             return MaterialButton(
                                               onPressed: () {
-                                                //TODO: Implement Download Book Functionality.
+                                                BlocProvider.of<BookCubit>(
+                                                        context)
+                                                    .getBookFile(
+                                                  bookId: book!.id!,
+                                                  bName: book!.name!,
+                                                );
                                               },
                                               color: AppColors.green,
                                               shape: RoundedRectangleBorder(
@@ -282,7 +292,8 @@ class _BookPageState extends State<BookPage> {
                                                 BlocProvider.of<CartCubit>(
                                                         context)
                                                     .addToCart(
-                                                        bookId: book!.id!);
+                                                  bookId: book!.id!,
+                                                );
                                               },
                                               color: const Color(0xff00A3FF),
                                               shape: RoundedRectangleBorder(
