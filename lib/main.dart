@@ -23,6 +23,7 @@ void main() async {
   if (kDebugMode) {
     Bloc.observer = MyBlocObserver();
   }
+  //This is main
   DioHelper.init();
   setPathUrlStrategy();
   SharedPreferences prefs = await SharedPreferences.getInstance();
